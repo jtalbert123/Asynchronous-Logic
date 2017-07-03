@@ -7,23 +7,14 @@ Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 
 -- Compiling entity T11_tb
 -- Compiling architecture testbench of T11_tb
 
-} {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/Register.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/Register.vhd}
+} {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/tests/CounterTest.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Talonj123\git\Asynchronous-Logic\NCL Gates\ncl\tests\CounterTest.vhd}
 Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package ncl
--- Compiling entity RegisterN
--- Compiling architecture structural of RegisterN
-
-} {} {}} ncl/ncl.vhd {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/ncl.vhd}
-Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Compiling package ncl
--- Compiling package body ncl
--- Loading package ncl
+-- Compiling entity Counter_TB
+-- Compiling architecture structural of Counter_TB
 
 } {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/tests/T21_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/tests/T21_tb.vhd}
 Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
@@ -34,6 +25,15 @@ Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 
 -- Compiling entity T21_tb
 -- Compiling architecture testbench of T21_tb
 
+} {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/tests/T22_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:\Users\Talonj123\git\Asynchronous-Logic\NCL Gates\ncl\tests\T22_tb.vhd}
+Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
+-- Loading package STANDARD
+-- Loading package TEXTIO
+-- Loading package std_logic_1164
+-- Loading package ncl
+-- Compiling entity T22_tb
+-- Compiling architecture testbench of T22_tb
+
 } {} {}} ncl/impl.vhd {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/impl.vhd}
 Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
 -- Loading package STANDARD
@@ -43,14 +43,14 @@ Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 
 -- Compiling entity TNM
 -- Compiling architecture simple of TNM
 
-} {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/tests/T22_tb.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/tests/T22_tb.vhd}
+} {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/HalfAdder.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/HalfAdder.vhd}
 Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
 -- Loading package STANDARD
 -- Loading package TEXTIO
 -- Loading package std_logic_1164
 -- Loading package ncl
--- Compiling entity T22_tb
--- Compiling architecture testbench of T22_tb
+-- Compiling entity HalfAdder
+-- Compiling architecture structural of HalfAdder
 
 } {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/FullAdder.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/FullAdder.vhd}
 Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
@@ -60,14 +60,5 @@ Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 
 -- Loading package ncl
 -- Compiling entity FullAdder
 -- Compiling architecture structural of FullAdder
-
-} {} {}} {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/HalfAdder.vhd} {1 {vcom -work work -2002 -explicit -stats=none {C:/Users/Talonj123/git/Asynchronous-Logic/NCL Gates/ncl/components/HalfAdder.vhd}
-Model Technology ModelSim PE Student Edition vcom 10.4a Compiler 2015.03 Apr  7 2015
--- Loading package STANDARD
--- Loading package TEXTIO
--- Loading package std_logic_1164
--- Loading package ncl
--- Compiling entity HalfAdder
--- Compiling architecture structural of HalfAdder
 
 } {} {}}

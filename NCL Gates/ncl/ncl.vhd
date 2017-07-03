@@ -19,7 +19,7 @@ package ncl is
 
   component RegisterN is
     generic(N : integer := 1;
-            RegisterDelay : time := 40 ns);
+            RegisterDelay : time := 20 ns);
     port(inputs    : in ncl_pair_vector(0 to N-1);
          from_next : in std_logic;
          output    : out ncl_pair_vector(0 to N-1);
