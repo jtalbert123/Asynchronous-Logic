@@ -1,2 +1,4 @@
 # Asynchronous Logic
 A place for my asynchronous logic code. My initial goal is to build an asynchronous MIPS microprocessor. I'll be using Modelsim PE Student Edition for the simulation. I'm running windows, so I may use batch files.
+
+I am using Null Convention Logic (see NCL.pdf for a paper that really helped me). The basic premis is to break data into `state present` and `state not present`. Only one state can be present at a time for a given signal, but it is possible to have no state (`Null`), indicating that the circuit hasn't finished yet. To be able to tell when the circuit is finished, the whole thing is cleared (`state not present` on all lines) between each operation (like a clock edge). The differnece between this and a clock edge is that the circuit tells when it's done and signals the reset itself, running as fast as it can.
