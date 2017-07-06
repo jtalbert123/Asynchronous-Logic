@@ -1,5 +1,7 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.math_real."ceil";
+use ieee.math_real."log2";
 
 package ncl is
   type ncl_pair is record
@@ -8,6 +10,8 @@ package ncl is
   end record ncl_pair;
   
   type ncl_pair_vector is array (integer range <>) of ncl_pair;
+
+  function clog2(input : integer) return integer;
   
   component TNM is
     generic(N : integer := 1;
@@ -33,8 +37,18 @@ package ncl is
          sum  : out ncl_pair;
          cout : out ncl_pair);
   end component;
+
+  component MUX is
+    generic(NumInputs : integer := 2);
+    port(iOptions : in  ncl_pair_vector(0 to NumInputs-1);
+         iSel     : in  ncl_pair_vector(0 to clog2(NumInputs)-1);
+         output   : out ncl_pair);
+  end component;
 end ncl;
 
 package body ncl is
-  
+  function clog2(input : integer) return integer is
+  begin
+    return integer(ceil(log2(real(input))));
+  end function;
 end package body ncl;
