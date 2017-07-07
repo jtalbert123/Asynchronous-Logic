@@ -12,7 +12,7 @@ architecture testbench of T21_tb is
   signal outputs : std_logic;
 begin
   
-  gate : TNM
+  gate : THmn
          generic map(N => 2,
                      M => 1)
          port map(inputs => inputs,

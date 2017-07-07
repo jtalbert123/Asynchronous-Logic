@@ -34,29 +34,29 @@ begin
         sels(i)(selBit) <= iSel(selBit).Data1;
       end generate; -- Cntl line selection
     end generate; -- CntlBits
-    RowCntl: TNM
+    RowCntl: THmn
                generic map(N => NumSels, M => NumSels)
                port map(inputs => sels(i), output => condensed_selectors(i));
     
     Gated0Inputs(i) <= condensed_selectors(i) & iOptions(i).Data0;
-    Gated0: TNM
+    Gated0: THmn
               generic map(N => 2, M=> 2)
               port map(inputs => Gated0Inputs(i),
                        output => o0ins(i));
 
     Gated1Inputs(i) <= condensed_selectors(i) & iOptions(i).Data1;
-    Gated1: TNM
+    Gated1: THmn
               generic map(N => 2, M=> 2)
               port map(inputs => Gated1Inputs(i),
                        output => o1ins(i));
 
   end generate; -- Rows
 
-  out0: TNM
+  out0: THmn
           generic map(N => NumInputs, M => 1)
           port map(inputs => o0ins, output => output.Data0);
 
-  out1: TNM
+  out1: THmn
           generic map(N => NumInputs, M => 1)
           port map(inputs => o1ins, output => output.Data1);
   

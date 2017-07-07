@@ -12,7 +12,7 @@ architecture testbench of T11_tb is
   signal outputs : std_logic;
 begin
   
-  gate : TNM
+  gate : THmn
          port map(inputs => inputs,
                   output => outputs);
   

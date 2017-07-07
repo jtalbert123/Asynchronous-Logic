@@ -12,7 +12,7 @@ architecture testbench of T22_tb is
   signal outputs : std_logic;
 begin
   
-  gate : TNM
+  gate : THmn
          generic map(N => 2,
                      M => 2)
          port map(inputs => inputs,

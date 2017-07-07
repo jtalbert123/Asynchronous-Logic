@@ -13,13 +13,13 @@ package ncl is
 
   function clog2(input : integer) return integer;
   
-  component TNM is
-    generic(N : integer := 1;
-            M : integer := 1;
+  component THmn is
+    generic(M : integer := 1;
+            N : integer := 1;
             Delay : time := 1 ns);
     port(inputs : in  std_logic_vector(0 to N-1);
          output : out std_logic);
-  end component TNM;
+  end component THmn;
 
   component RegisterN is
     generic(N : integer := 1;

@@ -17,14 +17,14 @@ architecture structural of RegisterN is
 begin
 
   register_gates: for i in 0 to N-1 generate
-    T22_i0 : TNM
+    T22_i0 : THmn
                generic map(N => 2, M => 2, Delay => RegisterDelay)
                port map(inputs(0) => inputs(i).DATA0,
                         inputs(1) => from_next,
                         output => outs(2*i));
     output(i).DATA0 <= outs(2*i);
 
-    T22_i1 : TNM
+    T22_i1 : THmn
                generic map(N => 2, M => 2, Delay => RegisterDelay)
                port map(inputs(0) => inputs(i).DATA1,
                         inputs(1) => from_next,
@@ -33,7 +33,7 @@ begin
 
   end generate register_gates;
   
-  watcher: TNM
+  watcher: THmn
              generic map (N => N*2, M => N)
              port map (inputs => outs,
                        output => watcher_out);

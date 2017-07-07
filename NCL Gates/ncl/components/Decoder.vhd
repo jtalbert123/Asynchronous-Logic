@@ -27,11 +27,11 @@ begin
         Gate1Inputs(i)(iBit) <= inputs(iBit).DATA1;
       end generate;
     end generate;
-    Gate0: TNM
+    Gate0: THmn
              generic map(N => NumInputs, M => 1)
              port map(inputs => Gate0Inputs(i),
                       output => outputs(i).DATA0);
-    Gate1: TNM
+    Gate1: THmn
              generic map(N => NumInputs, M => NumInputs)
              port map(inputs => Gate1Inputs(i),
                       output => outputs(i).DATA1);

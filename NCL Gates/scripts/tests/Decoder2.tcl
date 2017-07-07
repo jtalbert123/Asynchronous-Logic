@@ -32,9 +32,6 @@ proc clear { } {
 }
 
 proc set_inputs_now {A B} {
-  
-  clear
-  
   force -freeze sim:/Decoder2_tb/iA.DATA1 $A 0
   force -freeze sim:/Decoder2_tb/iA.DATA0 [expr 1-$A] 0
   run 0;
@@ -46,9 +43,6 @@ proc set_inputs_now {A B} {
 }
 
 proc null_inputs_now {} {
-  
-  clear
-  
   force -freeze sim:/Decoder2_tb/iA.DATA1 0 0
   force -freeze sim:/Decoder2_tb/iA.DATA0 0 0
   run 0;
@@ -59,9 +53,6 @@ proc null_inputs_now {} {
 }
 
 proc set_inputs {A B} {
-  
-  clear
-  
   force -freeze sim:/Decoder2_tb/iA.DATA1 $A [expr round(rand()*5)]
   force -freeze sim:/Decoder2_tb/iA.DATA0 [expr 1-$A] [expr round(rand()*5)]
   run 0;
@@ -72,9 +63,6 @@ proc set_inputs {A B} {
 }
 
 proc null_inputs {} {
-  
-  clear
-
   force -freeze sim:/Decoder2_tb/iA.DATA1 0 [expr round(rand()*5)]
   force -freeze sim:/Decoder2_tb/iA.DATA0 0 [expr round(rand()*5)]
   run 0;
@@ -112,44 +100,18 @@ add wave -radix ncl_pair_out -label "Output 0" -color $input_color sim:/Decoder2
 add wave -radix ncl_pair_out -label "Output 1" -color $input_color sim:/Decoder2_tb/output1_virt
 add wave -radix ncl_pair_out -label "Output 2" -color $input_color sim:/Decoder2_tb/output2_virt
 add wave -radix ncl_pair_out -label "Output 3" -color $input_color sim:/Decoder2_tb/output3_virt
-
-#add wave -divider "Internals"
-#quietly virtual signal -install sim:/Decoder2_tb/Decoder2 { (context sim:/Decoder2_tb/Decoder2 )(iOptions(0).data0 & iOptions(0).data1 )} {Options0_virt}
-#quietly virtual signal -install sim:/Decoder2_tb/Decoder2 { (context sim:/Decoder2_tb/Decoder2 )(iOptions(1).data0 & iOptions(1).data1 )} {Options1_virt}
-#quietly virtual signal -install sim:/Decoder2_tb/Decoder2 { (context sim:/Decoder2_tb/Decoder2 )(output.data0 & output.data1 )} {internal_out_virt}
-#add wave -radix ncl_pair_out -label "Options(0)" -color $input_color sim:/Decoder2_tb/Decoder2/Options0_virt
-#add wave -radix ncl_pair_out -label "Options(1)" -color $input_color sim:/Decoder2_tb/Decoder2/Options1_virt
-#add wave -radix ncl_pair_out -label "Output" -color $input_color sim:/Decoder2_tb/Decoder2/internal_out_virt
-#add wave sim:/Decoder2_tb/Decoder2/*
-
-#add wave -height 50 -divider "Internals"
-#
-#add wave -divider "RegBefore"
-#add wave -label "in(0)" -radix ncl_pair_in -color $input_color sim:/Decoder2_tb/RegBefore/i0_virt
-#add wave -label "in(1)" -radix ncl_pair_in -color $input_color sim:/Decoder2_tb/RegBefore/i1_virt
-#add wave -label "in(2)" -radix ncl_pair_in -color $input_color sim:/Decoder2_tb/RegBefore/i2_virt
-#add wave -label "out(0)" -radix ncl_pair_out -color $input_color sim:/Decoder2_tb/RegBefore/o0_virt
-#add wave -label "out(1)" -radix ncl_pair_out -color $input_color sim:/Decoder2_tb/RegBefore/o1_virt
-#add wave -label "out(2)" -radix ncl_pair_out -color $input_color sim:/Decoder2_tb/RegBefore/o2_virt
-#
-#add wave -divider "Decoder2"
-#add wave -label "Cin" -radix ncl_pair_in -color $input_color sim:/Decoder2_tb/Decoder2/cin_virt
-#add wave -label "A" -radix ncl_pair_in -color $input_color sim:/Decoder2_tb/Decoder2/a_virt
-#add wave -label "B" -radix ncl_pair_in -color $input_color sim:/Decoder2_tb/Decoder2/b_virt
-#add wave -label "Sum" -radix ncl_pair_out -color $output_color sim:/Decoder2_tb/Decoder2/sum_virt
-#add wave -label "Cout" -radix ncl_pair_out -color $output_color sim:/Decoder2_tb/Decoder2/cout_virt
 null_inputs_now
-run 50
+#run 50
 set expected 0
 for {set B 0} {$B <= 1} {incr B} {
   for {set A 0} {$A <= 1} {incr A} {
-    null_inputs_now
+    null_inputs
     run 10;
     while {[examine sim:/Decoder2_tb/to_prev] != 1} { run 1; }
-    set_inputs_now $A $B
+    set_inputs $A $B
     run 10;
     while {[examine sim:/Decoder2_tb/to_prev] != 0} { run 1; }
   }
 }
 
-run 50
+run 80

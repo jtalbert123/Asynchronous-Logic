@@ -3,15 +3,15 @@ use ieee.std_logic_1164.all;
 
 use work.ncl.all;
 
-entity TNM is
-  generic(N : integer := 1;
-          M : integer := 1;
+entity THmn is
+  generic(M : integer := 1;
+          N : integer := 1;
           Delay : time := 1 ns);
   port(inputs : in  std_logic_vector(0 to N-1);
        output : out std_logic := '0');
-end TNM;
+end THmn;
 
-architecture simple of TNM is
+architecture simple of THmn is
 begin
   
   ThresholdGate: process(inputs)
