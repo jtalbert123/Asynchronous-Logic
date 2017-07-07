@@ -38,7 +38,7 @@ begin
          port map(inputs(0) => out_internal,
                   output(0) => out_buf,
                   from_next => from_next, to_prev => internal_control);
-output <= out_buf;
+  output <= out_buf;
 
   AutoCntl: process (out_buf)
   begin

@@ -44,6 +44,12 @@ package ncl is
          iSel     : in  ncl_pair_vector(0 to clog2(NumInputs)-1);
          output   : out ncl_pair);
   end component;
+
+  component Decoder is
+    generic(NumInputs : integer := 2);
+    port(inputs  : in  ncl_pair_vector(0 to NumInputs-1);
+         outputs : out ncl_pair_vector(0 to (2**NumInputs)-1));
+  end component;
 end ncl;
 
 package body ncl is

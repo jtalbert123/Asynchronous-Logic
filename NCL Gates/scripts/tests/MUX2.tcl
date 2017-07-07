@@ -153,19 +153,18 @@ add wave -radix ncl_pair_out -label "Output" -color $input_color sim:/mux2_tb/ou
 null_inputs_now
 run 50
 set expected 0
-set runtime 50
 for {set A 0} {$A <= 1} {incr A} {
   for {set B 0} {$B <= 1} {incr B} {
     for {set S 0} {$S <= 1} {incr S} {
       null_inputs_now
-	  while {[examine sim:/mux2_tb/to_prev] != 1} { run 1; incr runtime 1;}
+	  while {[examine sim:/mux2_tb/to_prev] != 1} { run 1; }
 	  check $expected $now
-	  run 10;  incr runtime 10;
+	  run 10;
 	  set_inputs $A $B $S
 	  set expected [expr $S ? $B : $A]
 	  set_inputs_now $A $B $S
-	  while {[examine sim:/mux2_tb/to_prev] != 0} { run 1; incr runtime 1;}
-	  run 10;  incr runtime 10;
+	  while {[examine sim:/mux2_tb/to_prev] != 0} { run 1; }
+	  run 10;
     }
   }
 }

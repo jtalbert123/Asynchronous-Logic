@@ -22,23 +22,11 @@ architecture structural of MUX is
   signal Gated1Inputs : GatedNInputs(0 to NumInputs-1);
 
   signal o0ins : std_logic_vector(0 to NumInputs-1);
-  signal o1ins : std_logic_vector(0 to NumInputs-1);
-
-  type int_vec is array (integer range <>) of integer;
-  type ShiftVals is array (integer range <>) of int_vec(0 to NumSels - 1);
-  signal maskVals : ShiftVals(0 to NumInputs - 1);
-  signal iVals : ShiftVals(0 to NumInputs - 1);
-
-  signal maskedVals : ShiftVals(0 to NumInputs - 1);
-
-  signal i : integer := 0;
+  signal o1ins : std_logic_vector(0 to NumInputs-1); signal i : integer := 0;
 begin
   
   Rows: for i in 0 to NumInputs-1 generate
     CntlBits: for selBit in 0 to NumSels-1 generate
-      maskVals(i)(selBit) <= 2**selBit;
-      iVals(i)(selBit) <= i;
-      maskedVals(i)(selBit) <= to_integer(to_signed(2**selBit, NumSels+1) and to_signed(i, NumSels+1));
       Cntl0Selection: if (to_signed(2**selBit, NumSels+1) and to_signed(i, NumSels+1)) = 0 generate
         sels(i)(selBit) <= iSel(selBit).Data0;
       end generate;
