@@ -21,6 +21,12 @@ package ncl is
          output : out std_logic);
   end component THmn;
 
+  component THxor0 is
+    generic(Delay : time := 1 ns);
+    port(A, B, C, D : in  std_logic;
+         output : out std_logic);
+  end component THxor0;
+
   component RegisterN is
     generic(N : integer := 1;
             RegisterDelay : time := 20 ns);
