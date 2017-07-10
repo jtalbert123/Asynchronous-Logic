@@ -69,7 +69,7 @@ proc expect_null { } {
   }
 }
 
-proc expect_data { } {
+proc expect_data { A B C } {
   global now now
   set is_data 1
   for {set i 0} {$i < 3} {incr i} {
@@ -77,32 +77,53 @@ proc expect_data { } {
 	  set is_data 0
     }
   }
+  set tabbed 0
   if {$is_data == 0} {
     puts "Time: $now. Expected the output to be DATA. Was not DATA"
+	set tabbed 1
+  }
+  if {[examine sim:/RegisterN/o0_virt] != $A} {
+    if {$tabbed == 0} { puts "Time: $now."}
+    puts "    A: Expected $A, got [examine sim:/RegisterN/i0_virt]"
+	set tabbed 1
+  }
+  if {[examine sim:/RegisterN/o1_virt] != $B} {
+    if {$tabbed == 0} { puts "Time: $now."}
+    puts "    A: Expected $B, got [examine sim:/RegisterN/i1_virt]"
+	set tabbed 1
+  }
+  if {[examine sim:/RegisterN/o2_virt] != $C} {
+    if {$tabbed == 0} { puts "Time: $now."}
+    puts "    C: Expected $C, got [examine sim:/RegisterN/i2_virt]"
+	set tabbed 1
   }
 }
 
 vsim work.RegisterN -g N=3
 setup_input_signals
+set prevA 0
+set prevB 0
+set prevC 0
 set_inputs 0 0 0 1
-run 100
-proc empty {} {
+run 25
 for {set A 0} {$A <= 1} {incr A} {
   for {set B 0} {$B <= 1} {incr B} {
     for {set C 0} {$C <= 1} {incr C} {
       null_inputs 1
-	  run 100
-	  expect_data
+	  run 25
+	  expect_data $prevA $prevB $prevC
 	  null_inputs 0
-	  run 100
+	  run 25
 	  expect_null
 	  set_inputs $A $B $C 0
-	  run 100
+	  run 25
 	  expect_null
 	  set_inputs $A $B $C 1
-	  run 100
-	  expect_data
+	  run 25
+	  expect_data $A $B $C
+	  set prevA $A
+	  set prevB $B
+	  set prevC $C
     }
   }
-}
 }
