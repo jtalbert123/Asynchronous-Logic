@@ -82,3 +82,38 @@ begin
                     output => c0_out);
   c.DATA0 <= c0_out;
 end structural;
+
+architecture optimized of HalfAdder is
+
+begin
+  Sum0: THxor0
+          port map(A => A.DATA0,
+                   B => B.DATA0,
+                   C => A.DATA1,
+                   D => B.DATA1,
+                   output => s.DATA0);
+
+  Sum1: THxor0
+          port map(A => A.DATA1,
+                   B => B.DATA0,
+                   C => A.DATA0,
+                   D => B.DATA1,
+                   output => s.DATA1);
+
+  Carry0: THmn
+          generic map(N => 6, M => 3)
+          port map(inputs(0) => A.DATA0,
+                   inputs(1) => A.DATA0,
+                   inputs(2) => B.DATA0,
+                   inputs(3) => B.DATA0,
+                   inputs(4) => A.DATA1,
+                   inputs(5) => B.DATA1,
+                   output => c.DATA0);
+
+  Carry1: THmn
+          generic map(N => 2, M => 2)
+          port map(inputs(0) => A.DATA1,
+                   inputs(1) => B.DATA1,
+                   output => c.DATA1);
+
+end optimized;
