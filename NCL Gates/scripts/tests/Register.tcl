@@ -18,17 +18,21 @@ radix define ncl_pair_out {
 # 3 inputs + control
 
 proc setup_input_signals { } {
+  global input_color input_color
+  global output_color output_color
   add wave -divider "Inputs"
   for {set i 0} {$i < 3} {incr i} {
     quietly virtual signal -install sim:/RegisterN " (context sim:/RegisterN )(inputs($i).data0 & inputs($i).data1 )" "i${i}_virt"
 	add wave -radix ncl_pair_in -label "i${i}" sim:/RegisterN/i${i}_virt
-	
   }
+  add wave -color $input_color -label "from_next" sim:/RegisterN/from_next
+  
   add wave -divider "Outputs"
   for {set i 0} {$i < 3} {incr i} {
 	quietly virtual signal -install sim:/RegisterN " (context sim:/RegisterN )(output($i).data0 & output($i).data1 )" "o${i}_virt"
 	add wave -radix ncl_pair_out -label "o${i}" sim:/RegisterN/o${i}_virt
   }
+  add wave -color $output_color -label "to_prev" sim:/RegisterN/to_prev
 }
 
 proc set_inputs { A B C from_next } {
@@ -52,6 +56,7 @@ proc null_inputs { from_next } {
 }
 
 proc expect_null { } {
+  global now now
   set is_null 1
   set has_null 0
   for {set i 0} {$i < 3} {incr i} {
@@ -65,6 +70,7 @@ proc expect_null { } {
 }
 
 proc expect_data { } {
+  global now now
   set is_data 1
   for {set i 0} {$i < 3} {incr i} {
     if {[expr ([examine sim:/output($i).DATA0] == 0) * ([examine sim:/output($i).DATA1] == 0)]} {
