@@ -21,8 +21,8 @@ proc null_out_now {runtime} {
   force -freeze sim:/fulladder/a.data1 0 $runtime
   force -freeze sim:/fulladder/b.data0 0 $runtime
   force -freeze sim:/fulladder/b.data1 0 $runtime
-  force -freeze sim:/fulladder/cin.data0 0 $runtime
-  force -freeze sim:/fulladder/cin.data1 0 $runtime
+  force -freeze sim:/fulladder/iC.data0 0 $runtime
+  force -freeze sim:/fulladder/iC.data1 0 $runtime
 }
 
 proc null_out {runtime} {
@@ -30,8 +30,8 @@ proc null_out {runtime} {
   force -freeze sim:/fulladder/a.data1 0 [expr $runtime+round(rand()*5)]
   force -freeze sim:/fulladder/b.data0 0 [expr $runtime+round(rand()*5)]
   force -freeze sim:/fulladder/b.data1 0 [expr $runtime+round(rand()*5)]
-  force -freeze sim:/fulladder/cin.data0 0 [expr $runtime+round(rand()*5)]
-  force -freeze sim:/fulladder/cin.data1 0 [expr $runtime+round(rand()*5)]
+  force -freeze sim:/fulladder/iC.data0 0 [expr $runtime+round(rand()*5)]
+  force -freeze sim:/fulladder/iC.data1 0 [expr $runtime+round(rand()*5)]
 }
 
 proc set_inputs {runtime a b c} {
@@ -50,11 +50,11 @@ proc set_inputs {runtime a b c} {
 	force -freeze sim:/fulladder/b.data1 0 [expr $runtime+round(rand()*5)]
   }
   if {$c} {
-    force -freeze sim:/fulladder/cin.data0 0 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/cin.data1 1 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iC.data0 0 [expr $runtime+round(rand()*5)]
+	force -freeze sim:/fulladder/iC.data1 1 [expr $runtime+round(rand()*5)]
   } else {
-    force -freeze sim:/fulladder/cin.data0 1 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/cin.data1 0 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iC.data0 1 [expr $runtime+round(rand()*5)]
+	force -freeze sim:/fulladder/iC.data1 0 [expr $runtime+round(rand()*5)]
   }
 }
 
@@ -73,59 +73,59 @@ proc check {runtime} {
   } elseif {[examine /fulladder/b.data0 -time $runtime]} {
     set isnull 0
   }
-  if {[examine /fulladder/cin.data1 -time $runtime]} {
+  if {[examine /fulladder/iC.data1 -time $runtime]} {
     incr num
 	set isnull 0
-  } elseif {[examine /fulladder/cin.data0 -time $runtime]} {
+  } elseif {[examine /fulladder/iC.data0 -time $runtime]} {
     set isnull 0
   }
-  set cout [examine /fulladder/Flat_Cout -time $runtime]
-  set sout [examine /fulladder/Flat_Sum -time $runtime]
+  set oC [examine /fulladder/Flat_oC -time $runtime]
+  set sout [examine /fulladder/Flat_oS -time $runtime]
   set error 0
   if {isnull} {
-    if {$cout} {
+    if {$oC} {
 	  puts "Time: $runtime. Expected Null on Carry out signal"
 	  set error 1
 	}
 	if {$sout} {
-	  puts "Time: $runtime. Expected Null on Sum out signal"
+	  puts "Time: $runtime. Expected Null on oS out signal"
 	  set error 1
 	}
   } else {
     if {$num==0} {
-	  if {$cout != 2} {
+	  if {$oC != 2} {
 	    puts "Time: $runtime. Expected 0 on Carry out signal"
 	    set error 1
 	  }
 	  if {$sout != 2} {
-	    puts "Time: $runtime. Expected 0 on Sum out signal"
+	    puts "Time: $runtime. Expected 0 on oS out signal"
 	    set error 1
 	  }
 	} elseif {$num==1} {
-	  if {$cout != 2} {
+	  if {$oC != 2} {
 	    puts "Time: $runtime. Expected 0 on Carry out signal"
 	    set error 1
 	  }
 	  if {$sout != 1} {
-	    puts "Time: $runtime. Expected 1 on Sum out signal"
+	    puts "Time: $runtime. Expected 1 on oS out signal"
 	    set error 1
 	  }
 	} elseif {$num==2} {
-	  if {$cout != 1} {
+	  if {$oC != 1} {
 	    puts "Time: $runtime. Expected 1 on Carry out signal"
 	    set error 1
 	  }
 	  if {$sout != 2} {
-	    puts "Time: $runtime. Expected 0 on Sum out signal"
+	    puts "Time: $runtime. Expected 0 on oS out signal"
 	    set error 1
 	  }
 	} elseif {$num==3} {
-	  if {$cout != 1} {
+	  if {$oC != 1} {
 	    puts "Time: $runtime. Expected 1 on Carry out signal"
 	    set error 1
 	  }
 	  if {$sout != 1} {
-	    puts "Time: $runtime. Expected 1 on Sum out signal"
+	    puts "Time: $runtime. Expected 1 on oS out signal"
 	    set error 1
 	  }
 	}
@@ -144,15 +144,15 @@ proc test_FA {} {
   
   quietly virtual signal -install /fulladder { (context /fulladder )(a.data0 & a.data1 )} {Flat_A}
   quietly virtual signal -install /fulladder { (context /fulladder )(b.data0 & b.data1 )} {Flat_B}
-  quietly virtual signal -install /fulladder { (context /fulladder )(cin.data0 & cin.data1 )} {Flat_Cin}
-  quietly virtual signal -install /fulladder { (context /fulladder )(cout.data0 & cout.data1 )} {Flat_Cout}
-  quietly virtual signal -install /fulladder { (context /fulladder )(sum.data0 & sum.data1 )} {Flat_Sum}
-  add wave -radix ncl_pair_in -label "Input Carry" -color $input_color sim:/fulladder/flat_cin
+  quietly virtual signal -install /fulladder { (context /fulladder )(iC.data0 & iC.data1 )} {Flat_iC}
+  quietly virtual signal -install /fulladder { (context /fulladder )(oC.data0 & oC.data1 )} {Flat_oC}
+  quietly virtual signal -install /fulladder { (context /fulladder )(oS.data0 & oS.data1 )} {Flat_oS}
+  add wave -radix ncl_pair_in -label "Input Carry" -color $input_color sim:/fulladder/flat_iC
   add wave -radix ncl_pair_in -label "Input A" -color $input_color sim:/fulladder/flat_a
   add wave -radix ncl_pair_in -label "Input B" -color $input_color sim:/fulladder/flat_b
   
-  add wave -radix ncl_pair_out -label "Output Sum" -color $output_color sim:/fulladder/flat_sum
-  add wave -radix ncl_pair_out -label "Output Carry" -color $output_color sim:/fulladder/flat_cout
+  add wave -radix ncl_pair_out -label "Output Sum" -color $output_color sim:/fulladder/flat_oS
+  add wave -radix ncl_pair_out -label "Output Carry" -color $output_color sim:/fulladder/flat_oC
   
   set runtime 0
   null_out_now $runtime
