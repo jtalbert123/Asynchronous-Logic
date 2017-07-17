@@ -2,7 +2,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use work.ncl.all;
 
-entity Counter_TB is
+entity Adder_TB is
  port(iA        : in ncl_pair;
       iB        : in ncl_pair;
       iC        : in ncl_pair;
@@ -10,9 +10,9 @@ entity Counter_TB is
 --      from_next : in std_logic;
       oS        : out ncl_pair;
       oC        : out ncl_pair);
-end entity Counter_TB;
+end entity Adder_TB;
 
-architecture structural of Counter_TB is
+architecture structural of Adder_TB is
   signal A : ncl_pair;
   signal B : ncl_pair;
   signal Cin : ncl_pair;
@@ -33,8 +33,8 @@ begin
                   from_next => internal_control, to_prev => to_prev);
 
   Adder: FullAdder
-           port map(a => A, b => B, cin => Cin,
-                    sum => S, cout => Cout);
+           port map(a => A, b => B, iC => Cin,
+                    oS => S, oC => Cout);
 
   RegAfter: RegisterN
          generic map(N => 2)

@@ -86,17 +86,17 @@ proc set_inputs {A B C} {
 }
 
 proc null_inputs {} {
-    force -drive /adder_tb/iA.DATA1 0 [expr round(rand()*5)]
-	force -drive /adder_tb/iA.DATA0 0 [expr round(rand()*5)]
+  force -drive /adder_tb/iA.DATA1 0 [expr round(rand()*5)]
+  force -drive /adder_tb/iA.DATA0 0 [expr round(rand()*5)]
 	
-    force -drive /adder_tb/iB.DATA1 0 [expr round(rand()*5)]
-	force -drive /adder_tb/iB.DATA0 0 [expr round(rand()*5)]
+  force -drive /adder_tb/iB.DATA1 0 [expr round(rand()*5)]
+  force -drive /adder_tb/iB.DATA0 0 [expr round(rand()*5)]
 	
-    force -drive /adder_tb/iC.DATA1 0 [expr round(rand()*5)]
-	force -drive /adder_tb/iC.DATA0 0 [expr round(rand()*5)]
+  force -drive /adder_tb/iC.DATA1 0 [expr round(rand()*5)]
+  force -drive /adder_tb/iC.DATA0 0 [expr round(rand()*5)]
 }
 
-vcom -O1 -lint -quiet -check_synthesis -work work ncl/ncl.vhd ncl/impl.vhd ncl/components/FullAdder.vhd ncl/components/Register.vhd ncl/tests/CounterTest.vhd
+vcom -O1 -lint -quiet -check_synthesis -work work ncl/ncl.vhd ncl/impl.vhd ncl/components/FullAdder.vhd ncl/components/Register.vhd ncl/tests/Adder_tb.vhd
 view wave
 delete wave *
 vsim -quiet work.adder_tb
@@ -109,9 +109,9 @@ quietly virtual signal -install /adder_tb { (context /adder_tb )(oC.data0 & oC.d
 
 quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(a.data0 & a.data1 )} {a_virt}
 quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(b.data0 & b.data1 )} {b_virt}
-quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(cin.data0 & cin.data1 )} {cin_virt}
-quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(sum.data0 & sum.data1 )} {sum_virt}
-quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(cout.data0 & cout.data1 )} {cout_virt}
+quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(iC.data0 & iC.data1 )} {iC_virt}
+quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(oS.data0 & oS.data1 )} {oS_virt}
+quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(oC.data0 & oC.data1 )} {oC_virt}
 
 #quietly virtual signal -install /adder_tb/RegBefore { (context /adder_tb/RegBefore )(inputs(0).data0 & inputs(0).data1 )} {i0_virt}
 #quietly virtual signal -install /adder_tb/RegBefore { (context /adder_tb/RegBefore )(inputs(1).data0 & inputs(1).data1 )} {i1_virt}
@@ -140,24 +140,31 @@ add wave -radix ncl_pair_out -label "Output C" -color $input_color sim:/adder_tb
 #add wave -label "out(2)" -radix ncl_pair_out -color $input_color /adder_tb/RegBefore/o2_virt
 #
 #add wave -divider "Adder"
-#add wave -label "Cin" -radix ncl_pair_in -color $input_color /adder_tb/Adder/cin_virt
+#add wave -label "iC" -radix ncl_pair_in -color $input_color /adder_tb/Adder/iC_virt
 #add wave -label "A" -radix ncl_pair_in -color $input_color /adder_tb/Adder/a_virt
 #add wave -label "B" -radix ncl_pair_in -color $input_color /adder_tb/Adder/b_virt
-#add wave -label "Sum" -radix ncl_pair_out -color $output_color /adder_tb/Adder/sum_virt
-#add wave -label "Cout" -radix ncl_pair_out -color $output_color /adder_tb/Adder/cout_virt
+#add wave -label "oS" -radix ncl_pair_out -color $output_color /adder_tb/Adder/oS_virt
+#add wave -label "oC" -radix ncl_pair_out -color $output_color /adder_tb/Adder/oC_virt
 null_inputs_now
+set expectedS 0
+set expectedC 0
 run 50
 for {set A 0} {$A <= 1} {incr A} {
   for {set B 0} {$B <= 1} {incr B} {
-    for {set S 0} {$S <= 1} {incr S} {
+    for {set C 0} {$C <= 1} {incr C} {
       null_inputs
 	  while {[examine /adder_tb/to_prev] != 1} { run 1 }
-	  puts $expected
 	  run 10
+	  #check
+	  puts "Time: $now. S: $expectedS C: $expectedC"
+	  set expectedS [expr (($A + $B + $C) >> 0) & 1]
+	  set expectedC [expr (($A + $B + $C) >> 1) & 1]
+	  set_inputs $A $B $C
 	  while {[examine /adder_tb/to_prev] != 0} { run 1 }
 	  run 10
     }
   }
 }
+puts "Time: $now. S: $expectedS C: $expectedC"
 
 run 100

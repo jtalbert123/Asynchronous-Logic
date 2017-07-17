@@ -37,11 +37,11 @@ package ncl is
   end component;
   
   component FullAdder is    
-    port(cin  : in ncl_pair;
+    port(iC  : in ncl_pair;
          a    : in ncl_pair;
          b    : in ncl_pair;
-         sum  : out ncl_pair;
-         cout : out ncl_pair);
+         oS  : out ncl_pair;
+         oC : out ncl_pair);
   end component;
 
   component MUX is
