@@ -1,110 +1,50 @@
-radix define ncl_pair_0 {
-    "0" "Null" -color #5566ff,
-    "1" "1" -color #5566ff,
-    "2" "0" -color #5566ff,
-    "3" "Invalid" -color #5566ff,
-    -default default
-}
-radix define ncl_pair_1 {
-    "0" "Null" -color #9966ff,
-    "1" "1" -color #9966ff,
-    "2" "0" -color #9966ff,
-    "3" "Invalid" -color #9966ff, 
-    -default default
-}
+set NumStages 10
 
-radix define ncl_pair_2 {
-    "0" "Null" -color #ff3399, 
-    "1" "1" -color #ff3399, 
-    "2" "0" -color #ff3399, 
-    "3" "Invalid" -color #ff3399, 
-    -default default
-}
-
-radix define ncl_pair_3 {
-    "0" "Null" -color #ff9933, 
-    "1" "1" -color #ff9933, 
-    "2" "0" -color #ff9933, 
-    "3" "Invalid" -color #ff9933
-    -default default
-}
-
-radix define ncl_pair_4 {
-    "0" "Null" -color #66ff99, 
-    "1" "1" -color #66ff99, 
-    "2" "0" -color #66ff99, 
-    "3" "Invalid" -color #66ff99, 
-    -default default
-}
-
-radix define ncl_pair_5 {
-    "0" "Null" -color #33ccff, 
-    "1" "1" -color #33ccff, 
-    "2" "0" -color #33ccff, 
-    "3" "Invalid" -color #33ccff, 
-    -default default
+proc hsv2rgb {h s v} {
+    if {$s <= 0.0} {
+	# achromatic
+	set v [expr {int($v)}]
+	return "$v $v $v"
+    } else {
+	set v [expr {double($v)}]
+        if {$h >= 1.0} { set h 0.0 }
+        set h [expr {6.0 * $h}]
+        set f [expr {double($h) - int($h)}]
+        set p [expr {int(256 * $v * (1.0 - $s))}]
+        set q [expr {int(256 * $v * (1.0 - ($s * $f)))}]
+        set t [expr {int(256 * $v * (1.0 - ($s * (1.0 - $f))))}]
+	set v [expr {int(256 * $v)}]
+        switch [expr {int($h)}] {
+            0 { return [format #%02x%02x%02x $v $t $p] }
+            1 { return [format #%02x%02x%02x $q $v $p] }
+	    2 { return [format #%02x%02x%02x $p $v $t] }
+	    3 { return [format #%02x%02x%02x $p $q $v] }
+	    4 { return [format #%02x%02x%02x $t $p $v] }
+	    5 { return [format #%02x%02x%02x $v $p $q] }
+        }
+    }
 }
 
 vcom -O1 -lint -quiet -check_synthesis -work work ncl/ncl.vhd ncl/impl.vhd ncl/components/Register.vhd ncl/tests/static_loop.vhd
 view wave
 delete wave *
-vsim -gui work.static_loop
+vsim -gui work.static_loop -gNumStages=$NumStages
 
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(0)(0).data0 & stages(0)(0).data1 )} {s00_virt}
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(0)(1).data0 & stages(0)(1).data1 )} {s01_virt}
+for {set stage 0} {$stage < $NumStages} {incr stage} {
+  set color [hsv2rgb [expr ($stage + 0.0)/$NumStages] 1 0.8]
+  set bodystr "\"0\" \"Null\" -color $color, \"1\" \"1\" -color $color, \"2\" \"0\" -color $color, \"3\" \"Invalid\" -color $color, -default default"
+  set rdef "radix define ncl_pair_${stage} \{$bodystr\}"
+  eval $rdef
 
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(1)(0).data0 & stages(1)(0).data1 )} {s10_virt}
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(1)(1).data0 & stages(1)(1).data1 )} {s11_virt}
+  quietly virtual signal -install sim:/static_loop " (context sim:/static_loop )(stages($stage)(0).data0 & stages($stage)(0).data1 )" "s${stage}0_virt"
+  quietly virtual signal -install sim:/static_loop " (context sim:/static_loop )(stages($stage)(1).data0 & stages($stage)(1).data1 )" "s${stage}1_virt"
 
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(2)(0).data0 & stages(2)(0).data1 )} {s20_virt}
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(2)(1).data0 & stages(2)(1).data1 )} {s21_virt}
-
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(3)(0).data0 & stages(3)(0).data1 )} {s30_virt}
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(3)(1).data0 & stages(3)(1).data1 )} {s31_virt}
-
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(4)(0).data0 & stages(4)(0).data1 )} {s40_virt}
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(4)(1).data0 & stages(4)(1).data1 )} {s41_virt}
-
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(5)(0).data0 & stages(5)(0).data1 )} {s50_virt}
-quietly virtual signal -install sim:/static_loop { (context sim:/static_loop )(stages(5)(1).data0 & stages(5)(1).data1 )} {s51_virt}
-
-add wave -noupdate -divider {Stage 0}
-add wave -label {to_prev} -color #5566ff sim:/static_loop/controls(0)
-add wave -label {Stage0.A} -color #5566ff -radix ncl_pair_0 sim:/static_loop/s00_virt
-add wave -label {Stage0.B} -color #5566ff -radix ncl_pair_0 sim:/static_loop/s01_virt
-add wave -label {from_next} -color #5566ff sim:/static_loop/controls(1)
-
-add wave -noupdate -divider {Stage 1}
-add wave -label {to_prev} -color #9966ff  sim:/static_loop/controls(1)
-add wave -label {Stage1.A} -color #9966ff  -radix ncl_pair_1 sim:/static_loop/s10_virt
-add wave -label {Stage1.B} -color #9966ff  -radix ncl_pair_1 sim:/static_loop/s11_virt
-add wave -label {from_next} -color #9966ff  sim:/static_loop/controls(2)
-
-add wave -noupdate -divider {Stage 2}
-add wave -label {to_prev} -color #ff3399 sim:/static_loop/controls(2)
-add wave -label {Stage2.A} -color #ff3399 -radix ncl_pair_2 sim:/static_loop/s20_virt
-add wave -label {Stage2.B} -color #ff3399 -radix ncl_pair_2 sim:/static_loop/s21_virt
-add wave -label {from_next} -color #ff3399 sim:/static_loop/controls(3)
-
-add wave -noupdate -divider {Stage 3}
-add wave -label {to_prev} -color #ff9933 sim:/static_loop/controls(3)
-add wave -label {Stage3.A} -color #ff9933 -radix ncl_pair_3 sim:/static_loop/s30_virt
-add wave -label {Stage3.B} -color #ff9933 -radix ncl_pair_3 sim:/static_loop/s31_virt
-add wave -label {from_next} -color #ff9933 sim:/static_loop/controls(4)
-
-add wave -noupdate -divider {Stage 4}
-add wave -label {to_prev} -color #66ff99 sim:/static_loop/controls(4)
-add wave -label {Stage4.A} -color #66ff99 -radix ncl_pair_4 sim:/static_loop/s40_virt
-add wave -label {Stage4.B} -color #66ff99 -radix ncl_pair_4 sim:/static_loop/s41_virt
-add wave -label {from_next} -color #66ff99 sim:/static_loop/controls(5)
-
-add wave -noupdate -divider {Stage 5}
-add wave -label {to_prev} -color #33ccff sim:/static_loop/controls(5)
-add wave -label {Stage5.A} -color #33ccff -radix ncl_pair_5 sim:/static_loop/s50_virt
-add wave -label {Stage5.B} -color #33ccff -radix ncl_pair_5 sim:/static_loop/s51_virt
-add wave -label {from_next} -color #33ccff sim:/static_loop/controls(0)
-
-configure wave -timelineunits ns
+  add wave -noupdate -divider "Stage $stage"
+  add wave -label "to_prev" -color $color sim:/static_loop/controls($stage)
+  add wave -label "Stage${stage}.A" -color $color -radix ncl_pair_${stage} "sim:/static_loop/s${stage}0_virt"
+  add wave -label "Stage${stage}.B" -color $color -radix ncl_pair_${stage} "sim:/static_loop/s${stage}1_virt"
+  add wave -label "from_next" -color $color sim:/static_loop/controls([expr ($stage+1) % $NumStages])
+}
 
 force -freeze sim:/static_loop/stages(0)(0).data0 1 0
 force -freeze sim:/static_loop/stages(0)(1).data1 1 0
