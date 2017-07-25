@@ -1,3 +1,5 @@
 work/
 *.cr.mti
 wlft*
+*wave.do
+*vsim.wlf
