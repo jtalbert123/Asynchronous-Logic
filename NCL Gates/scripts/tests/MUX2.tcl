@@ -8,13 +8,6 @@ radix define ncl_pair_in {
   "3" Invalid -color #007fff
 }
 
-radix define raw_ncl_pair_in {
-  "0 0" Null -color #007fff
-  "1 0" 1 -color #007fff
-  "0 1" 0 -color #007fff
-  "1 1" Invalid -color #007fff
-}
-
 radix define ncl_pair_out {
   "0" Null -color #00Cf00
   "1" 1 -color #00Cf00
