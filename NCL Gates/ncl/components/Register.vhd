@@ -34,7 +34,7 @@ begin
   end generate register_gates;
   
   watcher: THmn
-             generic map (N => N*2, M => N)
+             generic map (N => N*2, M => N, Delay => 0 ns)
              port map (inputs => outs,
                        output => watcher_out);
   WatcherOutput: to_prev <= NOT watcher_out;
