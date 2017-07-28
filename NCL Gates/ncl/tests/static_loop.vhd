@@ -18,9 +18,9 @@ begin
       generic map(N  => NumLines,
                   RegisterDelay => 30 ns)
       port map(inputs => stages(i),
-               output  => stages((i+1) mod (NumStages)),
+               output  => stages((i+1) mod NumStages),
                to_prev  => controls(i),
-               from_next => controls((i+1) mod (NumStages)));
+               from_next => controls((i+1) mod NumStages));
   end generate;
   
 end structural;
