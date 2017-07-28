@@ -37,10 +37,19 @@ package ncl is
   end component;
   
   component FullAdder is    
-    port(iC  : in ncl_pair;
-         a    : in ncl_pair;
-         b    : in ncl_pair;
-         oS  : out ncl_pair;
+    port(iC : in  ncl_pair;
+         iA : in  ncl_pair;
+         iB : in  ncl_pair;
+         oS : out ncl_pair;
+         oC : out ncl_pair);
+  end component;
+
+  component Adder is
+    generic(NumAdderBits : integer := 4);
+    port(iC : in  ncl_pair;
+         iA : in  ncl_pair_vector(0 to NumAdderBits-1);
+         iB : in  ncl_pair_vector(0 to NumAdderBits-1);
+         oS : out ncl_pair_vector(0 to NumAdderBits-1);
          oC : out ncl_pair);
   end component;
 

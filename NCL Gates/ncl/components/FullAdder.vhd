@@ -5,8 +5,8 @@ use work.ncl.all;
 
 entity FullAdder is
   port(iC  : in ncl_pair;
-       a    : in ncl_pair;
-       b    : in ncl_pair;
+       iA    : in ncl_pair;
+       iB    : in ncl_pair;
        oS  : out ncl_pair;
        oC : out ncl_pair);
 end FullAdder;
@@ -19,8 +19,8 @@ architecture structural of FullAdder is
   signal inputs : ncl_pair_vector(0 to 2);
 
 begin
-  inputs(2) <= a;
-  inputs(1) <= b;
+  inputs(2) <= iA;
+  inputs(1) <= iB;
   inputs(0) <= iC;
   input_layer: for i in 0 to 7 generate
     bits: for ibit in 0 to 2 generate
@@ -83,22 +83,22 @@ architecture optimized of FullAdder is
 begin
   LT2: THmn
          generic map(M => 2, N => 3)
-         port map(inputs(0) => a.DATA0,
-                  inputs(1) => b.DATA0,
+         port map(inputs(0) => iA.DATA0,
+                  inputs(1) => iB.DATA0,
                   inputs(2) => iC.DATA0,
                   output => sLT2);
 
   GE2: THmn
          generic map(M => 2, N => 3)
-         port map(inputs(0) => a.DATA1,
-                  inputs(1) => b.DATA1,
+         port map(inputs(0) => iA.DATA1,
+                  inputs(1) => iB.DATA1,
                   inputs(2) => iC.DATA1,
                   output => sGE2);
 
   GE1: THmn
          generic map(M => 1, N => 3)
-         port map(inputs(0) => a.DATA1,
-                  inputs(1) => b.DATA1,
+         port map(inputs(0) => iA.DATA1,
+                  inputs(1) => iB.DATA1,
                   inputs(2) => iC.DATA1,
                   output => sGE1);
 
@@ -110,8 +110,8 @@ begin
 
   EQ3: THmn
          generic map(M => 3, N => 3)
-         port map(inputs(0) => a.DATA1,
-                  inputs(1) => b.DATA1,
+         port map(inputs(0) => iA.DATA1,
+                  inputs(1) => iB.DATA1,
                   inputs(2) => iC.DATA1,
                   output => sEQ3);
 
@@ -123,14 +123,14 @@ begin
 
   EQ0: THmn
          generic map(M => 3, N => 3)
-         port map(inputs(0) => a.DATA0,
-                  inputs(1) => b.DATA0,
+         port map(inputs(0) => iA.DATA0,
+                  inputs(1) => iB.DATA0,
                   inputs(2) => iC.DATA0,
                   output => sEQ0);
   LT3: THmn
          generic map(M => 1, N => 3)
-         port map(inputs(0) => a.DATA0,
-                  inputs(1) => b.DATA0,
+         port map(inputs(0) => iA.DATA0,
+                  inputs(1) => iB.DATA0,
                   inputs(2) => iC.DATA0,
                   output => sLT3);
 

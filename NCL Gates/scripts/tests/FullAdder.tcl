@@ -17,65 +17,65 @@ radix define ncl_pair_out {
 }
 
 proc null_out_now {runtime} {
-  force -freeze sim:/fulladder/a.data0 0 $runtime
-  force -freeze sim:/fulladder/a.data1 0 $runtime
-  force -freeze sim:/fulladder/b.data0 0 $runtime
-  force -freeze sim:/fulladder/b.data1 0 $runtime
+  force -freeze sim:/fulladder/iA.data0 0 $runtime
+  force -freeze sim:/fulladder/iA.data1 0 $runtime
+  force -freeze sim:/fulladder/iB.data0 0 $runtime
+  force -freeze sim:/fulladder/iB.data1 0 $runtime
   force -freeze sim:/fulladder/iC.data0 0 $runtime
   force -freeze sim:/fulladder/iC.data1 0 $runtime
 }
 
 proc null_out {runtime} {
-  force -freeze sim:/fulladder/a.data0 0 [expr $runtime+round(rand()*5)]
-  force -freeze sim:/fulladder/a.data1 0 [expr $runtime+round(rand()*5)]
-  force -freeze sim:/fulladder/b.data0 0 [expr $runtime+round(rand()*5)]
-  force -freeze sim:/fulladder/b.data1 0 [expr $runtime+round(rand()*5)]
+  force -freeze sim:/fulladder/iA.data0 0 [expr $runtime+round(rand()*5)]
+  force -freeze sim:/fulladder/iA.data1 0 [expr $runtime+round(rand()*5)]
+  force -freeze sim:/fulladder/iB.data0 0 [expr $runtime+round(rand()*5)]
+  force -freeze sim:/fulladder/iB.data1 0 [expr $runtime+round(rand()*5)]
   force -freeze sim:/fulladder/iC.data0 0 [expr $runtime+round(rand()*5)]
   force -freeze sim:/fulladder/iC.data1 0 [expr $runtime+round(rand()*5)]
 }
 
 proc set_inputs {runtime a b c} {
   if {$a} {
-    force -freeze sim:/fulladder/a.data0 0 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/a.data1 1 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iA.data0 0 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iA.data1 1 [expr $runtime+round(rand()*5)]
   } else {
-    force -freeze sim:/fulladder/a.data0 1 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/a.data1 0 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iA.data0 1 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iA.data1 0 [expr $runtime+round(rand()*5)]
   }
   if {$b} {
-    force -freeze sim:/fulladder/b.data0 0 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/b.data1 1 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iB.data0 0 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iB.data1 1 [expr $runtime+round(rand()*5)]
   } else {
-    force -freeze sim:/fulladder/b.data0 1 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/b.data1 0 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iB.data0 1 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iB.data1 0 [expr $runtime+round(rand()*5)]
   }
   if {$c} {
     force -freeze sim:/fulladder/iC.data0 0 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/iC.data1 1 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iC.data1 1 [expr $runtime+round(rand()*5)]
   } else {
     force -freeze sim:/fulladder/iC.data0 1 [expr $runtime+round(rand()*5)]
-	force -freeze sim:/fulladder/iC.data1 0 [expr $runtime+round(rand()*5)]
+    force -freeze sim:/fulladder/iC.data1 0 [expr $runtime+round(rand()*5)]
   }
 }
 
 proc check {runtime} {
   set num 0
   set isnull 1
-  if {[examine /fulladder/a.data1 -time $runtime]} {
+  if {[examine /fulladder/iA.data1 -time $runtime]} {
     incr num
-	set isnull 0
-  } elseif {[examine /fulladder/a.data0 -time $runtime]} {
+    set isnull 0
+  } elseif {[examine /fulladder/iA.data0 -time $runtime]} {
     set isnull 0
   }
-  if {[examine /fulladder/b.data1 -time $runtime]} {
+  if {[examine /fulladder/iB.data1 -time $runtime]} {
     incr num
-	set isnull 0
-  } elseif {[examine /fulladder/b.data0 -time $runtime]} {
+    set isnull 0
+  } elseif {[examine /fulladder/iB.data0 -time $runtime]} {
     set isnull 0
   }
   if {[examine /fulladder/iC.data1 -time $runtime]} {
     incr num
-	set isnull 0
+    set isnull 0
   } elseif {[examine /fulladder/iC.data0 -time $runtime]} {
     set isnull 0
   }
@@ -84,51 +84,51 @@ proc check {runtime} {
   set error 0
   if {isnull} {
     if {$oC} {
-	  puts "Time: $runtime. Expected Null on Carry out signal"
-	  set error 1
-	}
-	if {$sout} {
-	  puts "Time: $runtime. Expected Null on oS out signal"
-	  set error 1
-	}
+      puts "Time: $runtime. Expected Null on Carry out signal"
+      set error 1
+    }
+    if {$sout} {
+      puts "Time: $runtime. Expected Null on oS out signal"
+      set error 1
+    }
   } else {
     if {$num==0} {
-	  if {$oC != 2} {
-	    puts "Time: $runtime. Expected 0 on Carry out signal"
-	    set error 1
-	  }
-	  if {$sout != 2} {
-	    puts "Time: $runtime. Expected 0 on oS out signal"
-	    set error 1
-	  }
-	} elseif {$num==1} {
-	  if {$oC != 2} {
-	    puts "Time: $runtime. Expected 0 on Carry out signal"
-	    set error 1
-	  }
-	  if {$sout != 1} {
-	    puts "Time: $runtime. Expected 1 on oS out signal"
-	    set error 1
-	  }
-	} elseif {$num==2} {
-	  if {$oC != 1} {
-	    puts "Time: $runtime. Expected 1 on Carry out signal"
-	    set error 1
-	  }
-	  if {$sout != 2} {
-	    puts "Time: $runtime. Expected 0 on oS out signal"
-	    set error 1
-	  }
-	} elseif {$num==3} {
-	  if {$oC != 1} {
-	    puts "Time: $runtime. Expected 1 on Carry out signal"
-	    set error 1
-	  }
-	  if {$sout != 1} {
-	    puts "Time: $runtime. Expected 1 on oS out signal"
-	    set error 1
-	  }
-	}
+      if {$oC != 2} {
+        puts "Time: $runtime. Expected 0 on Carry out signal"
+        set error 1
+      }
+      if {$sout != 2} {
+        puts "Time: $runtime. Expected 0 on oS out signal"
+        set error 1
+      }
+    } elseif {$num==1} {
+      if {$oC != 2} {
+        puts "Time: $runtime. Expected 0 on Carry out signal"
+        set error 1
+      }
+      if {$sout != 1} {
+        puts "Time: $runtime. Expected 1 on oS out signal"
+        set error 1
+      }
+    } elseif {$num==2} {
+      if {$oC != 1} {
+        puts "Time: $runtime. Expected 1 on Carry out signal"
+        set error 1
+      }
+      if {$sout != 2} {
+        puts "Time: $runtime. Expected 0 on oS out signal"
+        set error 1
+      }
+    } elseif {$num==3} {
+      if {$oC != 1} {
+        puts "Time: $runtime. Expected 1 on Carry out signal"
+        set error 1
+      }
+      if {$sout != 1} {
+        puts "Time: $runtime. Expected 1 on oS out signal"
+        set error 1
+      }
+    }
   }
   return error;
 }
@@ -142,8 +142,8 @@ proc test_FA {} {
   vcom -O1 -lint -quiet -check_synthesis -work work ncl/ncl.vhd ncl/impl.vhd ncl/components/FullAdder.vhd
   vsim -quiet -gui work.FullAdder
   
-  quietly virtual signal -install /fulladder { (context /fulladder )(a.data0 & a.data1 )} {Flat_A}
-  quietly virtual signal -install /fulladder { (context /fulladder )(b.data0 & b.data1 )} {Flat_B}
+  quietly virtual signal -install /fulladder { (context /fulladder )(iA.data0 & iA.data1 )} {Flat_A}
+  quietly virtual signal -install /fulladder { (context /fulladder )(iB.data0 & iB.data1 )} {Flat_B}
   quietly virtual signal -install /fulladder { (context /fulladder )(iC.data0 & iC.data1 )} {Flat_iC}
   quietly virtual signal -install /fulladder { (context /fulladder )(oC.data0 & oC.data1 )} {Flat_oC}
   quietly virtual signal -install /fulladder { (context /fulladder )(oS.data0 & oS.data1 )} {Flat_oS}
@@ -173,8 +173,8 @@ proc test_FA {} {
   set prevState 0
   for {set time 25} {$time < $runtime} {incr time 50} {
     set localerror [check_result $N $M $prevState $time]
-	check $runtime
-	if {$localerror} {set error 1}
+    check $runtime
+    if {$localerror} {set error 1}
   }
   return $error 
 }

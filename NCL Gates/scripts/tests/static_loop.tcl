@@ -1,4 +1,4 @@
-set NumStages 10
+set NumStages 3
 
 proc hsv2rgb {h s v} {
     if {$s <= 0.0} {
