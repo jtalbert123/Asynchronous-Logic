@@ -9,8 +9,8 @@ end static_loop;
 
 architecture structural of static_loop is
   type stageLines is array (integer range <>) of ncl_pair_vector(0 to NumLines-1);
-  signal stages : stageLines(0 to NumStages - 1);
-  signal controls : std_logic_vector(0 to NumStages - 1);
+  signal stages : stageLines(0 to NumStages) := (others => (others => NCL_NULL));
+  signal controls : std_logic_vector(0 to NumStages);
 begin
   
   stage: for i in 0 to NumStages - 1 generate
@@ -18,9 +18,9 @@ begin
       generic map(N  => NumLines,
                   RegisterDelay => 30 ns)
       port map(inputs => stages(i),
-               output  => stages((i+1) mod NumStages),
+               output  => stages((i+1) mod (NumStages+1)),
                to_prev  => controls(i),
-               from_next => controls((i+1) mod NumStages));
+               from_next => controls((i+1) mod (NumStages+1)));
   end generate;
   
 end structural;

@@ -11,6 +11,8 @@ package ncl is
   
   type ncl_pair_vector is array (integer range <>) of ncl_pair;
 
+  constant NCL_NULL : ncl_pair;
+
   function clog2(input : integer) return integer;
   
   component THmn is
@@ -68,6 +70,7 @@ package ncl is
 end ncl;
 
 package body ncl is
+  constant NCL_NULL : ncl_pair := (others => '0');
   function clog2(input : integer) return integer is
   begin
     return integer(ceil(log2(real(input))));

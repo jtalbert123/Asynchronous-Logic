@@ -46,9 +46,9 @@ for {set stage 0} {$stage < $NumStages} {incr stage} {
   add wave -label "to_prev" -color $color sim:/static_loop/stage($stage)/stageRegister/to_prev
   add wave -label "Stage${stage}.iA" -color $color -radix ncl_pair_${stage} "sim:/static_loop/si${stage}0_virt"
   add wave -label "Stage${stage}.iB" -color $color -radix ncl_pair_${stage} "sim:/static_loop/si${stage}1_virt"
+  add wave -label "from_next" -color $color sim:/static_loop/stage($stage)/stageRegister/from_next
   add wave -label "Stage${stage}.oA" -color $color -radix ncl_pair_${stage} "sim:/static_loop/so${stage}0_virt"
   add wave -label "Stage${stage}.oB" -color $color -radix ncl_pair_${stage} "sim:/static_loop/so${stage}1_virt"
-  add wave -label "from_next" -color $color sim:/static_loop/stage($stage)/stageRegister/from_next
 
   add log sim:/static_loop/stage($stage)/stageRegister/watcher/*
   add log sim:/static_loop/stage($stage)/stageRegister/*
@@ -56,32 +56,48 @@ for {set stage 0} {$stage < $NumStages} {incr stage} {
   add log sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i1/*
   add log sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i0/*
   add log sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i1/*
+
+  add log sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i0/Delay
+  add log sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i1/Delay
+  add log sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i0/Delay
+  add log sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i1/Delay
 }
 
 quietly WaveActivateNextPane
-add wave -noupdate /static_loop/stage(0)/stageRegister/register_gates(0)/T22_i0/inputs
-add wave -noupdate /static_loop/stage(0)/stageRegister/register_gates(0)/T22_i1/inputs
-add wave -noupdate /static_loop/stage(0)/stageRegister/register_gates(1)/T22_i0/inputs
-add wave -noupdate /static_loop/stage(0)/stageRegister/register_gates(1)/T22_i1/inputs
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i0/inputs
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i0/output
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i1/inputs
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i1/output
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i0/inputs
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i0/output
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i1/inputs
+add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i1/output
 
+configure wave -namecolwidth 400
+WaveRestoreZoom {0 ns} {100 ns}
+run 0
+force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i0/sOut 1 0
 force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i0/output 1 0
+force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i1/sOut 0 0
 force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i1/output 0 0
+force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i0/sOut 1 0
 force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i0/output 1 0
+force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i1/sOut 0 0
 force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i1/output 0 0
-#force -deposit sim:/static_loop/stage(0)/stageRegister/to_prev 0 0 -cancel 1
-#force -deposit sim:/static_loop/stage(0)/stageRegister/register_gates(0)/T22_i0/output 1 0 -cancel 30#force -deposit sim:/static_loop/stage(0)/stageRegister/register_gates(0)/T22_i1/output 0 0 -cancel 30
-#force -deposit sim:/static_loop/stage(0)/stageRegister/register_gates(1)/T22_i0/output 1 0 -cancel 30
-#force -deposit sim:/static_loop/stage(0)/stageRegister/register_gates(1)/T22_i1/out
+force -deposit sim:/static_loop/stage(1)/stageRegister/watcher/sOut 1 0
+force -deposit sim:/static_loop/stage(1)/stageRegister/watcher/output 1 0
 
+
+force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i0/sOut 0 0
 force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i0/output 0 0
+force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i1/sOut 1 0
 force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i1/output 1 0
+force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i0/sOut 0 0
 force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i0/output 0 0
+force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i1/sOut 1 0
 force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i1/output 1 0
-#force -deposit sim:/static_loop/stage(2)/stageRegister/to_prev 0 0 -cancel 1
-#force -deposit sim:/static_loop/stages(0)(0).data0 1 0 -cancel 30
-#force -deposit sim:/static_loop/stages(0)(1).data0 1 0 -cancel 30
+force -deposit sim:/static_loop/stage(3)/stageRegister/watcher/sOut 1 0
+force -deposit sim:/static_loop/stage(3)/stageRegister/watcher/output 1 0
 
-#force -deposit sim:/static_loop/stages(2)(0).data1 1 0 -cancel 30
-#force -deposit sim:/static_loop/stages(2)(1).data1 1 0 -cancel 30
 
-run 400
+#run 40

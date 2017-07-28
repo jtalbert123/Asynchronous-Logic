@@ -12,26 +12,24 @@ entity THmn is
 end THmn;
 
 architecture simple of THmn is
+  signal sOut : std_logic;
 begin
+
+  output <= sOut after Delay;
   
   ThresholdGate: process(inputs)
-    --variable num_0 : integer;
     variable num_1 : integer;
-    --variable i     : integer;
   begin
-    --num_0 := 0;
     num_1 := 0;
     for i in 0 to N-1 loop
       if inputs(i) = '1' then
         num_1 := num_1 + 1;
-      --elsif inputs(i) = '0' then
-      --  num_0 := num_0 + 1;
       end if;
     end loop;
     if num_1 >= M then
-      output <= '1' after Delay;
+      sOut <= '1';
     elsif num_1 = 0 then
-      output <= '0' after Delay;
+      sOut <= '0';
     end if;
   end process;
 end simple;
