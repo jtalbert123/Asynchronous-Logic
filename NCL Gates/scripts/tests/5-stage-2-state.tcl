@@ -43,12 +43,12 @@ for {set stage 0} {$stage < $NumStages} {incr stage} {
   quietly virtual signal -install sim:/static_loop " (context sim:/static_loop/stage($stage)/stageRegister )(output(1).data0 & output(1).data1 )" "so${stage}1_virt"
 
   add wave -noupdate -divider "Stage $stage"
-  add wave -label "to_prev" -color $color sim:/static_loop/stage($stage)/stageRegister/to_prev
-  add wave -label "Stage${stage}.iA" -color $color -radix ncl_pair_${stage} "sim:/static_loop/si${stage}0_virt"
-  add wave -label "Stage${stage}.iB" -color $color -radix ncl_pair_${stage} "sim:/static_loop/si${stage}1_virt"
+#  add wave -label "Stage${stage}.iA" -color $color -radix ncl_pair_${stage} "sim:/static_loop/si${stage}0_virt"
+#  add wave -label "Stage${stage}.iB" -color $color -radix ncl_pair_${stage} "sim:/static_loop/si${stage}1_virt"
   add wave -label "from_next" -color $color sim:/static_loop/stage($stage)/stageRegister/from_next
   add wave -label "Stage${stage}.oA" -color $color -radix ncl_pair_${stage} "sim:/static_loop/so${stage}0_virt"
   add wave -label "Stage${stage}.oB" -color $color -radix ncl_pair_${stage} "sim:/static_loop/so${stage}1_virt"
+  add wave -label "to_prev" -color $color sim:/static_loop/stage($stage)/stageRegister/to_prev
 
   add log sim:/static_loop/stage($stage)/stageRegister/watcher/*
   add log sim:/static_loop/stage($stage)/stageRegister/*
@@ -63,41 +63,29 @@ for {set stage 0} {$stage < $NumStages} {incr stage} {
   add log sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i1/Delay
 }
 
-quietly WaveActivateNextPane
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i0/inputs
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i0/output
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i1/inputs
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(0)/T22_i1/output
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i0/inputs
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i0/output
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i1/inputs
-add wave sim:/static_loop/stage(4)/stageRegister/register_gates(1)/T22_i1/output
-
-configure wave -namecolwidth 400
-WaveRestoreZoom {0 ns} {100 ns}
+configure wave -namecolwidth 100
+configure wave -valuecolwidth 40
+WaveRestoreZoom {0 ns} {1000 ns}
 run 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i0/sOut 1 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i0/output 1 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i1/sOut 0 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(0)/T22_i1/output 0 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i0/sOut 1 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i0/output 1 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i1/sOut 0 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/register_gates(1)/T22_i1/output 0 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/watcher/sOut 1 0
-force -deposit sim:/static_loop/stage(1)/stageRegister/watcher/output 1 0
 
+proc setStageToData {stage val} {
+  set d0_0 [expr ($val & 1) == 0]
+  set d0_1 [expr ($val & 1) == 1]
 
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i0/sOut 0 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i0/output 0 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i1/sOut 1 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(0)/T22_i1/output 1 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i0/sOut 0 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i0/output 0 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i1/sOut 1 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/register_gates(1)/T22_i1/output 1 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/watcher/sOut 1 0
-force -deposit sim:/static_loop/stage(3)/stageRegister/watcher/output 1 0
+  set d1_0 [expr (($val >> 1) & 1) == 0]
+  set d1_1 [expr (($val >> 1) & 1) == 1]
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i0/sOut $d0_0 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i0/output $d0_0 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i1/sOut $d0_1 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(0)/T22_i1/output $d0_1 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i0/sOut $d1_0 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i0/output $d1_0 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i1/sOut $d1_1 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/register_gates(1)/T22_i1/output $d1_1 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/watcher/sOut 1 0
+  force -deposit sim:/static_loop/stage($stage)/stageRegister/watcher/output 1 0
+}
 
-
-#run 40
+setStageToData 0 0
+setStageToData 2 3
+run 1000
