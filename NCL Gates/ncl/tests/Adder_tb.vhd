@@ -33,7 +33,7 @@ begin
                   from_next => internal_control, to_prev => to_prev);
 
   Adder: FullAdder
-           port map(a => A, b => B, iC => Cin,
+           port map(iA => iA, iB => iB, iC => Cin,
                     oS => S, oC => Cout);
 
   RegAfter: RegisterN

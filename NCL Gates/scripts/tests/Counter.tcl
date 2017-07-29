@@ -107,8 +107,8 @@ quietly virtual signal -install /adder_tb { (context /adder_tb )(iC.data0 & iC.d
 quietly virtual signal -install /adder_tb { (context /adder_tb )(oS.data0 & oS.data1 )} {oS_virt}
 quietly virtual signal -install /adder_tb { (context /adder_tb )(oC.data0 & oC.data1 )} {oC_virt}
 
-quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(a.data0 & a.data1 )} {a_virt}
-quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(b.data0 & b.data1 )} {b_virt}
+quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(iA.data0 & iA.data1 )} {a_virt}
+quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(iB.data0 & iB.data1 )} {b_virt}
 quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(iC.data0 & iC.data1 )} {iC_virt}
 quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(oS.data0 & oS.data1 )} {oS_virt}
 quietly virtual signal -install /adder_tb/Adder { (context /adder_tb/Adder )(oC.data0 & oC.data1 )} {oC_virt}
