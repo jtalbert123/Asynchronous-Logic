@@ -18,7 +18,6 @@ architecture structural of Shifter is
   
   type RowSignals is array (integer range <>) of ncl_pair_vector(0 to NumInputs - 1);
   signal rows : RowSignals(0 to NumRows);
-  signal shift_in : RowSignals(0 to NumInputs-1);
   signal zero_in : ncl_pair;
   signal non_rotate_in : ncl_pair;
 
