@@ -8,6 +8,7 @@ I have begun doing some tests with Vivado using Xilinx FPGAs (the Zynq-7000 on t
  1. Vivado does not seem to allow for pre-declaring components in packages for RTL modules in a block design.
      - This means that the 'ncl.vhd' file I have been using will not be included in the Vivado setup, and would become inconsistent, so it is removed.
  2. Vivado does not allow for record types as ports in a block diagram, so the blocks will be transitioned using std_logic.
-     - For multi-bit signals, there will be separate vectors for DATA0 and DATA1 rails of each group. 
+     - For multi-bit signals, there will be separate vectors for DATA0 and DATA1 rails of each group.
+ 3. Different entities have to be defined in different files (I don't fully understand the details of the error Vivado gives, but moving things to different files fixes it).
  
  - These changes will invalidate existing components and tests. These will be updated as they are used and some may be broken indefinitely (or removed entirely). 
