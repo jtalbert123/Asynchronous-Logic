@@ -9,7 +9,7 @@ end static_loop;
 
 architecture structural of static_loop is
   type stageLines is array (integer range <>) of ncl_pair_vector(0 to NumLines-1);
-  signal stages : stageLines(0 to NumStages - 1) := (others => (others => NCL_NULL));
+  signal stages : stageLines(0 to NumStages - 1) := (others => (others => NCL_PAIR_NULL));
   signal controls : std_logic_vector(0 to NumStages - 1);
 begin
   
