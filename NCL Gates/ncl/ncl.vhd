@@ -51,14 +51,15 @@ package body ncl is
     variable toReturn : std_logic_vector(0 to vec'length-1);
   begin
     for i in 0 to vec'length-1 loop
-      toReturn(i) = vec(vec'low+i).data0;
+      toReturn(i) := vec(vec'low+i).data0;
     end loop;
   end function;
 
   function to_data1_vector(vec : ncl_pair_vector) return ncl_pair is
+    variable toReturn : std_logic_vector(0 to vec'length-1);
   begin
     for i in 0 to vec'length-1 loop
-      toReturn(i) = vec(vec'low+i).data1;
+      toReturn(i) := vec(vec'low+i).data1;
     end loop;
   end function;
 
