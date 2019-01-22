@@ -53,6 +53,9 @@ package ncl is
   function ncl_and(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
   function ncl_or(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
   function ncl_xor(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
+
+  function add(prev : ncl_pair_vector; left : ncl_pair_vector; right : ncl_pair_vector; ci : ncl_pair) return ncl_pair_vector;
+  function add(prev : ncl_pair_vector; a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector;
   
   component TH12 is
   port(iA : in  std_logic;
@@ -567,5 +570,61 @@ package body ncl is
     end if;
   end function;
 
+  function add(prev : ncl_pair_vector; a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector is
+    variable sum : ncl_pair;
+    variable carry : ncl_pair;
+  begin
+    if (a = NCL_PAIR_NULL AND b = NCL_PAIR_NULL AND ci = NCL_PAIR_NULL) then
+      sum := NCL_PAIR_NULL;
+      carry := NCL_PAIR_NULL;
+    elsif (a = NCL_PAIR_NULL OR b = NCL_PAIR_NULL OR ci = NCL_PAIR_NULL) then
+      sum := prev(0);
+      carry := prev(1);
+    elsif (a = NCL_PAIR_DATA0 AND b = NCL_PAIR_DATA0 AND ci = NCL_PAIR_DATA0) then
+      sum := NCL_PAIR_DATA0;
+      carry := NCL_PAIR_DATA0;
+    elsif (a = NCL_PAIR_DATA1 AND b = NCL_PAIR_DATA1 AND ci = NCL_PAIR_DATA0) then
+      sum := NCL_PAIR_DATA0;
+      carry := NCL_PAIR_DATA1;
+    elsif (a /= b AND ci = NCL_PAIR_DATA0) then
+      sum := NCL_PAIR_DATA1;
+      carry := NCL_PAIR_DATA0;
+    elsif (a = NCL_PAIR_DATA0 AND b = NCL_PAIR_DATA0 AND ci = NCL_PAIR_DATA1) then
+      sum := NCL_PAIR_DATA1;
+      carry := NCL_PAIR_DATA0;
+    elsif (a = NCL_PAIR_DATA1 AND b = NCL_PAIR_DATA1 AND ci = NCL_PAIR_DATA1) then
+      sum := NCL_PAIR_DATA1;
+      carry := NCL_PAIR_DATA1;
+    elsif (a /= b AND ci = NCL_PAIR_DATA1) then
+      sum := NCL_PAIR_DATA0;
+      carry := NCL_PAIR_DATA1;
+    end if;
+    return (sum & carry);
+  end function;
+
+  -- sum is the first N entries of the return.
+  function add(prev : ncl_pair_vector; left : ncl_pair_vector; right : ncl_pair_vector; ci : ncl_pair) return ncl_pair_vector is
+    -- Even indexes are the sums, odd are the carries.
+    variable values : ncl_pair_vector(0 to 2*left'length - 1);
+    variable toReturn : ncl_pair_vector(0 to 2*left'length - 1);
+  begin
+    -- translation from (sum,carries) to bit-by bit (sum0,carry0,sum1,carry1,...,sumN,carryN)
+    for i in 1 to left'length - 1 loop
+      values(2*i to 2*i+1) := (prev(i) & prev(i+left'length));
+    end loop;
+
+    -- Do the addition
+    values(0 to 1) := add(values(0 to 1), left(0), right(0), ci);
+    for i in 1 to left'length - 1 loop
+      values(2*i to 2*i+1) := add(values(2*i to 2*i+1), left(i), right(i), values(2*i-1));
+    end loop;
+
+    -- translation from bit-by bit (sum0,carry0,sum1,carry1,...,sumN,carryN) to (sum,carries)
+    for i in 1 to left'length - 1 loop
+      toReturn(i) := values(2*i);
+      toReturn(i+left'length) := values(2*i+1);
+    end loop;
+    return toReturn;
+  end function;
 
 end package body ncl;

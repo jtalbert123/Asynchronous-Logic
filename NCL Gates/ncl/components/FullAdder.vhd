@@ -15,7 +15,41 @@ entity FullAdder is
        oC_1 : out std_logic);
 end FullAdder;
 
-architecture structural of FullAdder is
+architecture functional of FullAdder is
+  signal A : ncl_pair;
+  signal B : ncl_pair;
+  signal Ci : ncl_pair;
+  signal S : ncl_pair;
+  signal Co : ncl_pair;
+begin
+  
+  A.DATA0 <= iA_0;
+  A.DATA1 <= iA_1;
+
+  B.DATA0 <= iB_0;
+  B.DATA1 <= iB_1;
+
+  Ci.DATA0 <= iC_0;
+  Ci.DATA1 <= iC_1;
+
+  process(A, B, Ci)
+    variable results : ncl_pair_vector(0 to 1);
+  begin
+    results := (S & Co);
+    results := add(results, A, B, Ci);
+    S <= results(0);
+    Co <= results(1);
+  end process;
+
+  oS_0 <= S.DATA0;
+  oS_1 <= S.DATA1;
+
+  oC_0 <= Co.DATA0;
+  oC_1 <= Co.DATA1;
+
+end functional;
+
+architecture behavioral of FullAdder is
   signal A : ncl_pair;
   signal B : ncl_pair;
   signal Ci : ncl_pair;
@@ -91,4 +125,4 @@ begin
   oC_0 <= Co.DATA0;
   oC_1 <= Co.DATA1;
 
-end structural;
+end behavioral;
