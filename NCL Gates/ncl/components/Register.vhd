@@ -2,40 +2,50 @@ library ieee;
 use ieee.std_logic_1164.all;
 use work.ncl.all;
 
-entity RegisterN is
-  generic(N : integer := 1;
-          RegisterDelay : time := 20 ns);
-  port(inputs    : in ncl_pair_vector(0 to N-1);
+entity DualRailRegister is
+  generic(N : integer := 1);
+  port(iData0    : in std_logic_vector(0 to N-1);
+       iData1    : in std_logic_vector(0 to N-1);
+       -- Indicates what the next block wants to recieve (data or null)
        from_next : in std_logic;
-       output    : out ncl_pair_vector(0 to N-1);
+       oData0    : out std_logic_vector(0 to N-1);
+       oData1    : out std_logic_vector(0 to N-1);
+       -- What this block wants to recieve (data or null)
        to_prev   : out std_logic);
-end RegisterN;
+end DualRailRegister;
 
-architecture structural of RegisterN is
-  signal outs : std_logic_vector(0 to (2*N)-1);
+architecture structural of DualRailRegister is
+  signal outs0 : std_logic_vector(0 to N-1);
+  signal outs1 : std_logic_vector(0 to N-1);
+  signal watchers : std_logic_vector(0 to N-1);
   signal watcher_out : std_logic := '0';
 begin
 
   register_gates: for i in 0 to N-1 generate
-    T22_i0 : THmn
-               generic map(N => 2, M => 2, Delay => RegisterDelay)
-               port map(inputs(0) => inputs(i).DATA0,
-                        inputs(1) => from_next,
-                        output => outs(2*i));
-    output(i).DATA0 <= outs(2*i);
+    Reg_i0 : TH22
+               port map(iA => iData0(i),
+                        iB => from_next,
+                        osig => outs0(i));
+    Reg_i1 : TH22
+               port map(iA => iData1(i),
+                        iB => from_next,
+                        osig => outs1(i));
 
-    T22_i1 : THmn
-               generic map(N => 2, M => 2, Delay => RegisterDelay)
-               port map(inputs(0) => inputs(i).DATA1,
-                        inputs(1) => from_next,
-                        output => outs(2*i+1));
-    output(i).DATA1 <= outs(2*i+1);
+    watcher_i : TH12
+               port map(iA => outs0(i),
+                        iB => outs1(i),
+                        osig => watchers(i));
+
+    oData0(i) <= outs0(i);
+    oData1(i) <= outs1(i);
 
   end generate register_gates;
   
-  watcher: THmn
-             generic map (N => N*2, M => N, Delay => 0 ns)
-             port map (inputs => outs,
-                       output => watcher_out);
+  watcher: THnn
+             generic map (N => N)
+             port map (isig => watchers,
+                       osig => watcher_out);
+
   WatcherOutput: to_prev <= NOT watcher_out;
+
 end structural; 
