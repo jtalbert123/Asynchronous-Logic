@@ -3,13 +3,7 @@ use ieee.std_logic_1164.all;
 use work.ncl.all;
 
 entity Adder_TB is
- port(iA        : in ncl_pair;
-      iB        : in ncl_pair;
-      iC        : in ncl_pair;
-      to_prev   : out std_logic;
---      from_next : in std_logic;
-      oS        : out ncl_pair;
-      oC        : out ncl_pair);
+  
 end entity Adder_TB;
 
 architecture structural of Adder_TB is

@@ -1,152 +1,94 @@
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all;
 use work.ncl.all;
 
 entity FullAdder is
-  port(iC  : in ncl_pair;
-       iA    : in ncl_pair;
-       iB    : in ncl_pair;
-       oS  : out ncl_pair;
-       oC : out ncl_pair);
+  port(iA_0 : in std_logic;
+       iA_1 : in std_logic;
+       iB_0 : in std_logic;
+       iB_1 : in std_logic;
+       iC_0 : in std_logic;
+       iC_1 : in std_logic;
+       oS_0 : out std_logic;
+       oS_1 : out std_logic;
+       oC_0 : out std_logic;
+       oC_1 : out std_logic);
 end FullAdder;
 
-
 architecture structural of FullAdder is
-  type first_layer is array (integer range <>) of std_logic_vector(0 to 2);
-  signal first_layer_inputs : first_layer(0 to 7);
-  signal intermedate : std_logic_vector(0 to 7);
-  signal inputs : ncl_pair_vector(0 to 2);
-
+  signal A : ncl_pair;
+  signal B : ncl_pair;
+  signal Ci : ncl_pair;
+  signal S : ncl_pair;
+  signal Co : ncl_pair;
 begin
-  inputs(2) <= iA;
-  inputs(1) <= iB;
-  inputs(0) <= iC;
-  input_layer: for i in 0 to 7 generate
-    bits: for ibit in 0 to 2 generate
-      Input0Selection: if (to_unsigned(2**ibit, 3) and to_unsigned(i, 3)) = 0 generate
-        first_layer_inputs(i)(ibit) <= inputs(ibit).Data0;
-      end generate;
-      Input1Selection: if (to_unsigned(2**ibit, 3) and to_unsigned(i, 3)) > 0 generate
-        first_layer_inputs(i)(ibit) <= inputs(ibit).Data1;
-      end generate;
-    end generate;
-    gate: THmn
-            generic map(M => 3, N => 3)
-            port map(inputs => first_layer_inputs(i),
-                     output => intermedate(i));
-  end generate;
+  
+  A.DATA0 <= iA_0;
+  A.DATA1 <= iA_1;
 
-  oS0: THmn
-         generic map(M => 1, N => 4)
-         port map(inputs(0) => intermedate(0),
-                  inputs(1) => intermedate(3),
-                  inputs(2) => intermedate(5),
-                  inputs(3) => intermedate(6),
-                  output => oS.DATA0);
+  B.DATA0 <= iB_0;
+  B.DATA1 <= iB_1;
 
-  oS1: THmn
-         generic map(M => 1, N => 4)
-         port map(inputs(0) => intermedate(1),
-                  inputs(1) => intermedate(2),
-                  inputs(2) => intermedate(4),
-                  inputs(3) => intermedate(7),
-                  output => oS.DATA1);
+  Ci.DATA0 <= iC_0;
+  Ci.DATA1 <= iC_1;
 
-  oC0: THmn
-         generic map(M => 1, N => 4)
-         port map(inputs(0) => intermedate(0),
-                  inputs(1) => intermedate(1),
-                  inputs(2) => intermedate(2),
-                  inputs(3) => intermedate(4),
-                  output => oC.DATA0);
+  process(A, B, Ci)
+  begin
+    if (A = NCL_PAIR_NULL AND
+        B = NCL_PAIR_NULL AND
+        Ci = NCL_PAIR_NULL) then
+      S <= NCL_PAIR_NULL;
+      Co <= NCL_PAIR_NULL;
 
-  oC1: THmn
-         generic map(M => 1, N => 4)
-         port map(inputs(0) => intermedate(3),
-                  inputs(1) => intermedate(5),
-                  inputs(2) => intermedate(6),
-                  inputs(3) => intermedate(7),
-                  output => oC.DATA1);
+    elsif (A = NCL_PAIR_NULL OR
+           B = NCL_PAIR_NULL OR
+           Ci = NCL_PAIR_NULL) then
+      S <= S;
+      Co <= Co;
+
+    elsif (A = NCL_PAIR_DATA0 AND
+           B = NCL_PAIR_DATA0 AND
+           Ci = NCL_PAIR_DATA0) then
+      S <= NCL_PAIR_DATA0;
+      Co <= NCL_PAIR_DATA0;
+
+    elsif (A = NCL_PAIR_DATA0 AND
+           B = NCL_PAIR_DATA1 AND
+           Ci = NCL_PAIR_DATA1) then
+      S <= NCL_PAIR_DATA0;
+      Co <= NCL_PAIR_DATA1;
+
+    elsif (A = NCL_PAIR_DATA0 AND
+           B /= Ci) then
+      S <= NCL_PAIR_DATA1;
+      Co <= NCL_PAIR_DATA0;
+
+
+    elsif (A = NCL_PAIR_DATA1 AND
+           B = NCL_PAIR_DATA0 AND
+           Ci = NCL_PAIR_DATA0) then
+      S <= NCL_PAIR_DATA1;
+      Co <= NCL_PAIR_DATA0;
+
+    elsif (A = NCL_PAIR_DATA1 AND
+           B = NCL_PAIR_DATA1 AND
+           Ci = NCL_PAIR_DATA1) then
+      S <= NCL_PAIR_DATA1;
+      Co <= NCL_PAIR_DATA1;
+
+    elsif (A = NCL_PAIR_DATA1 AND
+           B /= Ci) then
+      S <= NCL_PAIR_DATA0;
+      Co <= NCL_PAIR_DATA1;
+
+    end if;
+
+  end process;
+
+  oS_0 <= S.DATA0;
+  oS_1 <= S.DATA1;
+
+  oC_0 <= Co.DATA0;
+  oC_1 <= Co.DATA1;
+
 end structural;
-
-architecture optimized of FullAdder is
-  signal sLT2 : std_logic;
-  signal sLT3 : std_logic;
-  signal sGE2 : std_logic;
-  signal sGE1 : std_logic;
-  signal sEQ3 : std_logic;
-  signal sEQ2 : std_logic;
-  signal sEQ1 : std_logic;
-  signal sEQ0 : std_logic;
-
-begin
-  LT2: THmn
-         generic map(M => 2, N => 3)
-         port map(inputs(0) => iA.DATA0,
-                  inputs(1) => iB.DATA0,
-                  inputs(2) => iC.DATA0,
-                  output => sLT2);
-
-  GE2: THmn
-         generic map(M => 2, N => 3)
-         port map(inputs(0) => iA.DATA1,
-                  inputs(1) => iB.DATA1,
-                  inputs(2) => iC.DATA1,
-                  output => sGE2);
-
-  GE1: THmn
-         generic map(M => 1, N => 3)
-         port map(inputs(0) => iA.DATA1,
-                  inputs(1) => iB.DATA1,
-                  inputs(2) => iC.DATA1,
-                  output => sGE1);
-
-  EQ1: THmn
-         generic map(M => 2, N => 2)
-         port map(inputs(0) => sGE1,
-                  inputs(1) => sLT2,
-                  output => sEQ1);
-
-  EQ3: THmn
-         generic map(M => 3, N => 3)
-         port map(inputs(0) => iA.DATA1,
-                  inputs(1) => iB.DATA1,
-                  inputs(2) => iC.DATA1,
-                  output => sEQ3);
-
-  S1: THmn
-        generic map(M => 1, N => 2)
-        port map(inputs(0) => sEQ1,
-                 inputs(1) => sEQ3,
-                 output => oS.DATA1);
-
-  EQ0: THmn
-         generic map(M => 3, N => 3)
-         port map(inputs(0) => iA.DATA0,
-                  inputs(1) => iB.DATA0,
-                  inputs(2) => iC.DATA0,
-                  output => sEQ0);
-  LT3: THmn
-         generic map(M => 1, N => 3)
-         port map(inputs(0) => iA.DATA0,
-                  inputs(1) => iB.DATA0,
-                  inputs(2) => iC.DATA0,
-                  output => sLT3);
-
-  EQ2: THmn
-         generic map(M => 2, N => 2)
-         port map(inputs(0) => sGE2,
-                  inputs(1) => sLT3,
-                  output => sEQ2);
-
-  S0: THmn
-        generic map(M => 1, N => 2)
-        port map(inputs(0) => sEQ2,
-                 inputs(1) => sEQ0,
-                 output => oS.DATA0);
-
-  oC.DATA0 <= sLT2;
-  oC.DATA1 <= sGE2;
-
-end optimized;
