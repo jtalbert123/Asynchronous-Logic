@@ -15,8 +15,8 @@ begin
 
   process(iA, iB, fb) begin
     if (iA AND iB) = '1' then fb <= '1';
-    elsif (iA OR iB) = '0' then osig <= '0';
-    else osig <= fb;
+    elsif (iA OR iB) = '0' then fb <= '0';
+    else fb <= fb;
     end if;
   end process;
   

@@ -20,6 +20,39 @@ package ncl is
   function to_ncl_pair_vector(data0 : std_logic_vector; data1 : std_logic_vector) return ncl_pair_vector;
   function to_data0_vector(vec : ncl_pair_vector) return std_logic_vector;
   function to_data1_vector(vec : ncl_pair_vector) return std_logic_vector;
+
+  function TH12_f(prev : std_logic; a : std_logic; b : std_logic) return std_logic;
+  function TH22_f(prev : std_logic; a : std_logic; b : std_logic) return std_logic;
+  function TH13_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic;
+  function TH23_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic;
+  function TH33_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic;
+  function TH23w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic;
+  function TH33w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic;
+  function TH14_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH24_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH34_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH44_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH24w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH34w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH44w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH34w3_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH44w3_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH24w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH34w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH44w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH54w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH34w32_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH54w32_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH44w322_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH54w322_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function THxor0_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function THand0_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+  function TH24comp_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic;
+
+  function "not"(val : ncl_pair) return ncl_pair;
+  function ncl_and(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
+  function ncl_or(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
+  function ncl_xor(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
   
   component TH12 is
   port(iA : in  std_logic;
@@ -285,5 +318,254 @@ package body ncl is
     end loop;
     return toReturn;
   end function;
+
+  function "not"(val : ncl_pair) return ncl_pair is
+  begin
+    return (val.DATA1, val.DATA0);
+  end function;
+
+  function ncl_and(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair is
+  begin
+    if (left = NCL_PAIR_NULL AND right = NCL_PAIR_NULL) then return NCL_PAIR_NULL;
+    elsif (left = NCL_PAIR_NULL OR right = NCL_PAIR_NULL) then return prev;
+    elsif (left = NCL_PAIR_DATA1 AND right = NCL_PAIR_DATA1) then return NCL_PAIR_DATA1;
+    else return NCL_PAIR_DATA0;
+    end if;
+  end function;
+
+  function ncl_or(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair is
+  begin
+    if (left = NCL_PAIR_NULL AND right = NCL_PAIR_NULL) then return NCL_PAIR_NULL;
+    elsif (left = NCL_PAIR_NULL OR right = NCL_PAIR_NULL) then return prev;
+    elsif (left = NCL_PAIR_DATA1 OR right = NCL_PAIR_DATA1) then return NCL_PAIR_DATA1;
+    else return NCL_PAIR_DATA0;
+    end if;
+  end function;
+
+  function ncl_xor(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair is
+  begin
+    if (left = NCL_PAIR_NULL AND right = NCL_PAIR_NULL) then return NCL_PAIR_NULL;
+    elsif (left = NCL_PAIR_NULL OR right = NCL_PAIR_NULL) then return prev;
+    elsif (left /= right) then return NCL_PAIR_DATA1;
+    else return NCL_PAIR_DATA0;
+    end if;
+  end function;
+
+  function TH12_f(prev : std_logic; a : std_logic; b : std_logic) return std_logic is
+  begin
+    if (a OR b) = '0' then return '0';
+    elsif (a OR b) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH22_f(prev : std_logic; a : std_logic; b : std_logic) return std_logic is
+  begin
+    if (a OR b) = '0' then return '0';
+    elsif (a AND b) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH13_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic is
+  begin
+    if (a OR b) = '0' then return '0';
+    elsif (a OR b OR c) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH23_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic is
+  begin
+    if (a OR b OR c) = '0' then return '0';
+    elsif ((a AND b) OR (b AND c) OR (c AND a)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH33_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic is
+  begin
+    if (a OR b OR c) = '0' then return '0';
+    elsif (a AND b AND c) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH23w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic is
+  begin
+    if (a OR b OR c) = '0' then return '0';
+    elsif (a OR (b AND c)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH33w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic) return std_logic is
+  begin
+    if (a OR b OR c) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH14_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif (a OR b OR c OR d) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH24_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c) OR (a AND d) OR (b AND c) OR (b AND d) OR (c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH34_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b AND c) OR (a AND b AND d) OR (a AND c AND d) OR (b AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH44_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif (a AND b AND c AND d) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH24w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif (a OR (b AND c) OR (b AND d) OR (c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH34w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c) OR (a AND d) OR (b AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH44w2_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b AND c) OR (a AND b AND d) OR (a AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH34w3_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif (a OR (b AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH44w3_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c) OR (a AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH24w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif (a OR b OR (c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH34w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c) OR (a AND d) OR (b AND c) OR (b AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH44w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c AND d) OR (b AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH54w22_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b AND c) OR (a AND b AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH34w32_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif (a OR (b AND c) OR (b AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH54w32_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH44w322_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c) OR (a AND d) OR (b AND c)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function TH54w322_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (a AND c) OR (b AND c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function THxor0_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b) OR (c AND d)) = '1' then return '1';
+    else return prev;
+    end if;
+  end function;
+
+  function THand0_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND b)OR (b AND c) OR (a AND d)) = '1' then return '1';
+    else return prev; 
+    end if;
+  end function;
+
+  function TH24comp_f(prev : std_logic; a : std_logic; b : std_logic; c : std_logic; d : std_logic) return std_logic is
+  begin
+    if (a OR b OR c OR d) = '0' then return '0';
+    elsif ((a AND c) OR (b AND c) OR (a AND d) OR (b AND d)) = '1' then return '1';
+    else return prev; 
+    end if;
+  end function;
+
 
 end package body ncl;
