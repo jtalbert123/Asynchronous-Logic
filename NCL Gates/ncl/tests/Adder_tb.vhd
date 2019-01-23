@@ -1,51 +1,216 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use work.ncl.all;
 
-entity Adder_TB is
-  
-end entity Adder_TB;
+entity adder_tb is
+  port(iA : out std_logic_vector(31 downto 0);
+       iB : out std_logic_vector(31 downto 0);
+       iC : out std_logic;
+       oS : out std_logic_vector(31 downto 0);
+       oC : out std_logic_vector(31 downto 0));
+end entity adder_tb;
 
-architecture structural of Adder_TB is
-  signal A : ncl_pair;
-  signal B : ncl_pair;
-  signal Cin : ncl_pair;
+architecture structural of adder_tb is
 
-  signal S : ncl_pair;
-  signal Cout : ncl_pair;
+  signal A : ncl_pair_vector(31 downto 0) := ncl_pair_null_vector(32);
+  signal B : ncl_pair_vector(31 downto 0) := ncl_pair_null_vector(32);
+  signal Ci : ncl_pair;
 
-  signal outS : ncl_pair;
-  signal outC : ncl_pair;
+  signal S : ncl_pair_vector(31 downto 0) := ncl_pair_null_vector(32);
+  signal Co : ncl_pair;
 
-  signal internal_control : std_logic;
-  signal from_next : std_logic;
+  signal adder_state : ncl_pair_vector(63 downto 0) := ncl_pair_null_vector(64);
 begin
-  RegBefore: RegisterN
-         generic map(N => 3)
-         port map(inputs(0) => iA, inputs(1) => iB, inputs(2) => iC,
-                  output(0) =>  A, output(1) =>  B, output(2) =>  Cin,
-                  from_next => internal_control, to_prev => to_prev);
+  
+  adder_state <= add(adder_state, A, B, ci);
+  S <= adder_state(31 downto 0);
+  Co <= adder_state(adder_state'high);
 
-  Adder: FullAdder
-           port map(iA => iA, iB => iB, iC => Cin,
-                    oS => S, oC => Cout);
+  iA <= to_data1_vector(A);
+  iB <= to_data1_vector(B);
+  iC <= Ci.DATA1;
+  oS <= to_data1_vector(S);
+  oC <= to_data1_vector(adder_state(63 downto 32));
 
-  RegAfter: RegisterN
-         generic map(N => 2)
-         port map(inputs(0) =>  S, inputs(1) =>  Cout,
-                  output(0) => outS, output(1) => outC,
-                  from_next => from_next, to_prev => internal_control);
-  oS <= outS;
-  oC <= outC;
-  AutoCntl: process (outS, outC)
+  cases: process
   begin
-    if (outS.DATA0 = '0' and outS.DATA1 = '0' and outC.DATA0 = '0' and outC.DATA1 = '0') then
-      -- Null Case
-      from_next <= '1';
-    elsif ((outS.DATA0 = '1' or outS.DATA1 = '1') and (outC.DATA0 = '1' or outC.DATA1 = '1')) then
-      -- Data Case
-      from_next <= '0';
-    end if;
-  end process AutoCntl;
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(0, 32));
+    B <= to_ncl_pair_data_vector(to_signed(0, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(0, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(1, 32));
+    B <= to_ncl_pair_data_vector(to_signed(0, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(1, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(0, 32));
+    B <= to_ncl_pair_data_vector(to_signed(1, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(1, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(1, 32));
+    B <= to_ncl_pair_data_vector(to_signed(1, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(2, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(-1, 32));
+    B <= to_ncl_pair_data_vector(to_signed(0, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(-1, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(0, 32));
+    B <= to_ncl_pair_data_vector(to_signed(-1, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(-1, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(-1, 32));
+    B <= to_ncl_pair_data_vector(to_signed(1, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(0, 32));
+    ASSERT Co = NCL_PAIR_DATA1;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(3, 32));
+    B <= to_ncl_pair_data_vector(to_signed(1, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(4, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(-3, 32));
+    B <= to_ncl_pair_data_vector(to_signed(1, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = to_ncl_pair_data_vector(to_signed(-2, 32));
+    ASSERT Co = NCL_PAIR_DATA0;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(0, 32));
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= ncl_pair_null_vector(32);
+    B <= to_ncl_pair_data_vector(to_signed(0, 32));
+    Ci <= NCL_PAIR_DATA0;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= to_ncl_pair_data_vector(to_signed(0, 32));
+    B <= to_ncl_pair_data_vector(to_signed(0, 32));
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    A <= ncl_pair_null_vector(32);
+    B <= ncl_pair_null_vector(32);
+    Ci <= NCL_PAIR_NULL;
+    wait for 100 ns;
+    ASSERT S = ncl_pair_null_vector(32);
+    ASSERT Co = NCL_PAIR_NULL;
+
+    wait;
+  end process cases;
 
 end structural;

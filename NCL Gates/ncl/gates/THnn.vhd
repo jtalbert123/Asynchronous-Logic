@@ -5,7 +5,7 @@ use ieee.numeric_std.all;
 -- an OR gate
 entity TH1n is
   generic(N : integer := 2);
-  port(isig : in  std_logic_vector(0 to N-1);
+  port(isig : in  std_logic_vector(N-1 downto 0);
        osig : out std_logic := '0');
 end TH1n;
 

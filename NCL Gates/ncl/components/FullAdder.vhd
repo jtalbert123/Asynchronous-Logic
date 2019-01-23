@@ -33,7 +33,7 @@ begin
   Ci.DATA1 <= iC_1;
 
   process(A, B, Ci)
-    variable results : ncl_pair_vector(0 to 1);
+    variable results : ncl_pair_vector(1 downto 0);
   begin
     results := (S & Co);
     results := add(results, A, B, Ci);

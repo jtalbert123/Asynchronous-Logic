@@ -1,5 +1,6 @@
 library ieee;
 use ieee.std_logic_1164.all;
+use ieee.numeric_std.all;
 use ieee.math_real."ceil";
 use ieee.math_real."log2";
 
@@ -8,12 +9,23 @@ package ncl is
     data0 : std_logic;
     data1 : std_logic;
   end record ncl_pair;
-  
-  type ncl_pair_vector is array (integer range <>) of ncl_pair;
 
   constant NCL_PAIR_NULL : ncl_pair;
   constant NCL_PAIR_DATA0 : ncl_pair;
   constant NCL_PAIR_DATA1 : ncl_pair;
+  
+  type ncl_pair_vector is array (integer range <>) of ncl_pair;
+
+  type ncl_pair_enum is ('N', '0', '1');
+  type ncl_pair_enum_vector is array (integer range<>) of ncl_pair_enum;
+
+  function to_ncl_pair_vector(initializer : ncl_pair_enum_vector) return ncl_pair_vector;
+  function to_ncl_pair_enum_vector(initializer : ncl_pair_vector) return ncl_pair_enum_vector;
+  function ncl_pair_null_vector(N : integer) return ncl_pair_vector;
+  function to_ncl_pair_data_vector(value : std_logic_vector) return ncl_pair_vector;
+  function to_ncl_pair_data_vector(value : bit_vector) return ncl_pair_vector;
+  function to_ncl_pair_data_vector(value : unsigned) return ncl_pair_vector;
+  function to_ncl_pair_data_vector(value : signed) return ncl_pair_vector;
 
   function clog2(input : integer) return integer;
   function to_ncl_pair(data0 : std_logic; data1 : std_logic) return ncl_pair;
@@ -55,7 +67,7 @@ package ncl is
   function ncl_xor(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
 
   function add(prev : ncl_pair_vector; left : ncl_pair_vector; right : ncl_pair_vector; ci : ncl_pair) return ncl_pair_vector;
-  function add(prev : ncl_pair_vector; a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector;
+  function add(prev : ncl_pair_vector(1 downto 0); a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector;
   
   component TH12 is
   port(iA : in  std_logic;
@@ -267,14 +279,14 @@ package ncl is
   -- an OR gate
   component TH1n is
     generic(N : integer := 2);
-    port(isig : in  std_logic_vector(0 to N-1);
+    port(isig : in  std_logic_vector(N-1 downto 0);
          osig : out std_logic := '0');
   end component;
 
   -- a NCL AND gate
   component THnn is
     generic(N : integer := 2);
-    port(isig : in  std_logic_vector(0 to N-1);
+    port(isig : in  std_logic_vector(N-1 downto 0);
          osig : out std_logic := '0');
   end component;
 
@@ -296,27 +308,27 @@ package body ncl is
   end function;
 
   function to_ncl_pair_vector(data0 : std_logic_vector; data1 : std_logic_vector) return ncl_pair_vector is
-    variable toReturn : ncl_pair_vector(0 to data0'length-1);
+    variable toReturn : ncl_pair_vector(data0'length-1 downto 0);
   begin
-    for i in 0 to data0'length-1 loop
+    for i in data0'length-1 downto 0 loop
 	toReturn(i) := (data0(data0'low+i), data1(data1'low+i));
     end loop;
     return toReturn;
   end function;
 
   function to_data0_vector(vec : ncl_pair_vector) return std_logic_vector is
-    variable toReturn : std_logic_vector(0 to vec'length-1);
+    variable toReturn : std_logic_vector(vec'length-1 downto 0);
   begin
-    for i in 0 to vec'length-1 loop
+    for i in vec'length-1 downto 0 loop
       toReturn(i) := vec(vec'low+i).data0;
     end loop;
     return toReturn;
   end function;
 
   function to_data1_vector(vec : ncl_pair_vector) return std_logic_vector is
-    variable toReturn : std_logic_vector(0 to vec'length-1);
+    variable toReturn : std_logic_vector(vec'length-1 downto 0);
   begin
-    for i in 0 to vec'length-1 loop
+    for i in vec'length-1 downto 0 loop
       toReturn(i) := vec(vec'low+i).data1;
     end loop;
     return toReturn;
@@ -570,7 +582,7 @@ package body ncl is
     end if;
   end function;
 
-  function add(prev : ncl_pair_vector; a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector is
+  function add(prev : ncl_pair_vector(1 downto 0); a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector is
     variable sum : ncl_pair;
     variable carry : ncl_pair;
   begin
@@ -599,30 +611,109 @@ package body ncl is
       sum := NCL_PAIR_DATA0;
       carry := NCL_PAIR_DATA1;
     end if;
-    return (sum & carry);
+    return (carry&sum);
   end function;
 
   -- sum is the first N entries of the return.
   function add(prev : ncl_pair_vector; left : ncl_pair_vector; right : ncl_pair_vector; ci : ncl_pair) return ncl_pair_vector is
     -- Even indexes are the sums, odd are the carries.
-    variable values : ncl_pair_vector(0 to 2*left'length - 1);
-    variable toReturn : ncl_pair_vector(0 to 2*left'length - 1);
+    variable values : ncl_pair_vector(2*left'length - 1 downto 0);
+    variable toReturn : ncl_pair_vector(2*left'length - 1 downto 0);
+    variable temp : ncl_pair_vector(1 downto 0);
   begin
     -- translation from (sum,carries) to bit-by bit (sum0,carry0,sum1,carry1,...,sumN,carryN)
-    for i in 1 to left'length - 1 loop
-      values(2*i to 2*i+1) := (prev(i) & prev(i+left'length));
+    for i in left'length - 1 downto 0 loop
+      values(2*i+1 downto 2*i) := (prev(i) & prev(i+left'length));
     end loop;
 
     -- Do the addition
-    values(0 to 1) := add(values(0 to 1), left(0), right(0), ci);
+    values(1 downto 0) := add(values(1 downto 0), left(0), right(0), ci);
+    temp := values(1 downto 0);
     for i in 1 to left'length - 1 loop
-      values(2*i to 2*i+1) := add(values(2*i to 2*i+1), left(i), right(i), values(2*i-1));
+      values(2*i+1 downto 2*i) := add(values(2*i+1 downto 2*i), left(i), right(i), values(2*i-1));
     end loop;
 
     -- translation from bit-by bit (sum0,carry0,sum1,carry1,...,sumN,carryN) to (sum,carries)
-    for i in 1 to left'length - 1 loop
+    for i in left'length - 1 downto 0 loop
       toReturn(i) := values(2*i);
       toReturn(i+left'length) := values(2*i+1);
+    end loop;
+    return toReturn;
+  end function;
+
+  function to_ncl_pair_vector(initializer : ncl_pair_enum_vector) return ncl_pair_vector is
+    variable toReturn : ncl_pair_vector(initializer'length - 1 downto 0);
+  begin
+    for i in initializer'length - 1 downto 0 loop
+      if (initializer(i) = 'N') then toReturn(i) := NCL_PAIR_NULL;
+      elsif (initializer(i) = '0') then toReturn(i) := NCL_PAIR_DATA0;
+      elsif (initializer(i) = '1') then toReturn(i) := NCL_PAIR_DATA1;
+      end if;
+    end loop;
+    return toReturn;
+  end function;
+
+  function to_ncl_pair_enum_vector(initializer : ncl_pair_vector) return ncl_pair_enum_vector is
+    variable toReturn : ncl_pair_enum_vector(initializer'length - 1 downto 0);
+  begin
+    for i in initializer'length - 1 downto 0 loop
+      if (initializer(i) = NCL_PAIR_NULL) then toReturn(i) := 'N';
+      elsif (initializer(i) = NCL_PAIR_DATA0) then toReturn(i) := '0';
+      elsif (initializer(i) = NCL_PAIR_DATA1) then toReturn(i) := '1';
+      end if;
+    end loop;
+    return toReturn;
+  end function;
+
+  function ncl_pair_null_vector(N : integer) return ncl_pair_vector is
+    variable toReturn : ncl_pair_vector(N - 1 downto 0);
+  begin
+    for i in N - 1 downto 0 loop
+      toReturn(i) := NCL_PAIR_NULL;
+    end loop;
+    return toReturn;
+  end function;
+
+  function to_ncl_pair_data_vector(value : std_logic_vector) return ncl_pair_vector is
+    variable toReturn : ncl_pair_vector(value'length - 1 downto 0);
+  begin
+    for i in value'length - 1 downto 0 loop
+      if (value(i + value'low) = '0') then toReturn(i) := NCL_PAIR_DATA0;
+      elsif (value(i + value'low) = '1') then toReturn(i) := NCL_PAIR_DATA1;
+      end if;
+    end loop;
+    return toReturn;
+  end function;
+
+  function to_ncl_pair_data_vector(value : bit_vector) return ncl_pair_vector is
+    variable toReturn : ncl_pair_vector(value'length - 1 downto 0);
+  begin
+    for i in value'length - 1 downto 0 loop
+      if (value(i + value'low) = '0') then toReturn(i) := NCL_PAIR_DATA0;
+      elsif (value(i + value'low) = '1') then toReturn(i) := NCL_PAIR_DATA1;
+      end if;
+    end loop;
+    return toReturn;
+  end function;
+
+  function to_ncl_pair_data_vector(value : unsigned) return ncl_pair_vector is
+    variable toReturn : ncl_pair_vector(value'length - 1 downto 0);
+  begin
+    for i in value'length - 1 downto 0 loop
+      if (value(i + value'low) = '0') then toReturn(i) := NCL_PAIR_DATA0;
+      elsif (value(i + value'low) = '1') then toReturn(i) := NCL_PAIR_DATA1;
+      end if;
+    end loop;
+    return toReturn;
+  end function;
+
+  function to_ncl_pair_data_vector(value : signed) return ncl_pair_vector is
+    variable toReturn : ncl_pair_vector(value'length - 1 downto 0);
+  begin
+    for i in value'length - 1 downto 0 loop
+      if (value(i + value'low) = '0') then toReturn(i) := NCL_PAIR_DATA0;
+      elsif (value(i + value'low) = '1') then toReturn(i) := NCL_PAIR_DATA1;
+      end if;
     end loop;
     return toReturn;
   end function;
