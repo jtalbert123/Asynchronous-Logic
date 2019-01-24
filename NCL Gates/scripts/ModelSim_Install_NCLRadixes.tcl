@@ -33,7 +33,7 @@ proc install_ncl2_radix {name color_data color_null} {
 
 install_ncl2_radix "ncl_red" [hsv2rgb 0 0.7 1] [hsv2rgb 0 0.3 0.6]
 install_ncl2_radix "ncl_green" [hsv2rgb 0.33 0.7 0.8] [hsv2rgb 0.33 0.3 0.5]
-install_ncl2_radix "ncl_blue" [hsv2rgb 0.6 0.6 0.9] [hsv2rgb 0.67 0.3 0.6]
+install_ncl2_radix "ncl_blue" [hsv2rgb 0.6 0.6 0.9] [hsv2rgb 0.6 0.3 0.6]
 
 proc add_ncl_wave {label path radix} {
     quietly virtual signal "(${path}.data0 & ${path}.data1 )" "${label}_virtual_concat"
