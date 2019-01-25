@@ -8,7 +8,7 @@ entity adder_tb is
        iB : out std_logic_vector(31 downto 0);
        iC : out std_logic;
        oS : out std_logic_vector(31 downto 0);
-       oC : out std_logic_vector(31 downto 0));
+       oC : out std_logic);
 end entity adder_tb;
 
 architecture structural of adder_tb is
@@ -24,15 +24,15 @@ architecture structural of adder_tb is
 begin
   
   adder_state <= add(adder_state, A, B, ci);
-  S <= adder_state(31 downto 0);
-  Co <= adder_state(adder_state'high);
+  S <= add_extractsum(adder_state)(31 downto 0);
+  Co <= add_extractsum(adder_state)(32);
 
   iA <= to_data1_vector(A);
   iB <= to_data1_vector(B);
   iC <= Ci.DATA1;
   oS <= to_data1_vector(S);
-  oC <= to_data1_vector(adder_state(63 downto 32));
-
+  oC <= Co.DATA1;
+  
   cases: process
   begin
     A <= ncl_pair_null_vector(32);

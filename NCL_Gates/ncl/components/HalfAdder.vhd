@@ -3,14 +3,10 @@ use ieee.std_logic_1164.all;
 use work.ncl.all;
 
 entity HalfAdder is
-  port(iA_0 : in std_logic;
-       iA_1 : in std_logic;
-       iB_0 : in std_logic;
-       iB_1 : in std_logic;
-       oS_0 : out std_logic;
-       oS_1 : out std_logic;
-       oC_0 : out std_logic;
-       oC_1 : out std_logic);
+  port(iA : in ncl_pair;
+       iB : in ncl_pair;
+       oS : out ncl_pair;
+       oC : out ncl_pair);
 end HalfAdder;
 
 architecture structural of HalfAdder is
@@ -20,11 +16,8 @@ architecture structural of HalfAdder is
   signal C : ncl_pair;
 begin
   
-  A.DATA0 <= iA_0;
-  A.DATA1 <= iA_1;
-
-  B.DATA0 <= iB_0;
-  B.DATA1 <= iB_1;
+  A <= iA;
+  B <= iB;
 
   T22_C1 : TH22
            port map(iA => A.DATA1,
@@ -52,10 +45,7 @@ begin
                     iD => B.DATA0,
                     osig => S.DATA1);
 
-  oS_0 <= S.DATA0;
-  oS_1 <= S.DATA1;
-
-  oC_0 <= C.DATA0;
-  oC_1 <= C.DATA1;
+  oS <= S;
+  oC <= C;
 
 end structural;

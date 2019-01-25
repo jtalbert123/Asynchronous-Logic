@@ -3,13 +3,13 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 -- an OR gate
-entity TH1n is
+entity THnn is
   generic(N : integer := 2);
   port(isig : in  std_logic_vector(N-1 downto 0);
        osig : out std_logic := '0');
-end TH1n;
+end THnn;
 
-architecture simple of TH1n is
+architecture simple of THnn is
   signal fb : std_logic;
 begin
 

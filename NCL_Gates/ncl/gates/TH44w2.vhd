@@ -1,15 +1,15 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-entity TH34w2 is
+entity TH44w2 is
   port(iA : in  std_logic;
        iB : in  std_logic;
        iC : in  std_logic;
        iD : in  std_logic;
        osig : out std_logic := '0');
-end TH34w2;
+end TH44w2;
 
-architecture simple of TH34w2 is
+architecture simple of TH44w2 is
   signal fb : std_logic;
 begin
 
