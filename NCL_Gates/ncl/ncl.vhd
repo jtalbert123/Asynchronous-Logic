@@ -66,8 +66,11 @@ package ncl is
   function ncl_or(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
   function ncl_xor(prev : ncl_pair; left : ncl_pair; right : ncl_pair) return ncl_pair;
 
+  -- Requires 2*N ncl_pairs of storage. use add_extractsum(retval) to get the result
   function add(prev : ncl_pair_vector; left : ncl_pair_vector; right : ncl_pair_vector; ci : ncl_pair) return ncl_pair_vector;
-  function add(prev : ncl_pair_vector(1 downto 0); a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector;
+  -- Requires 7 ncl_pairs of storage, with the sum being at index 0, and the carry at index 1.
+  function add(prev : ncl_pair_vector(6 downto 0); a : ncl_pair; b : ncl_pair; c : ncl_pair) return ncl_pair_vector;
+  -- The extractor for the sum from the N-bit add function. Returns the sum and the last carry (N+1 bits).
   function add_extractsum(state : ncl_pair_vector) return ncl_pair_vector;
   
   component TH12 is
@@ -583,39 +586,39 @@ package body ncl is
     end if;
   end function;
 
-  function add(prev : ncl_pair_vector(1 downto 0); a : ncl_pair; b : ncl_pair; ci : ncl_pair) return ncl_pair_vector is
-    variable sum : ncl_pair;
-    variable carry : ncl_pair;
-	variable states : ncl_pair_vector(1 downto 0);
+  function add(prev : ncl_pair_vector(6 downto 0); a : ncl_pair; b : ncl_pair; c : ncl_pair) return ncl_pair_vector is
+    variable state : ncl_pair_vector(prev'length - 1 downto 0);
   begin
-    if (a = NCL_PAIR_NULL AND b = NCL_PAIR_NULL AND ci = NCL_PAIR_NULL) then
-      sum := NCL_PAIR_NULL;
-      carry := NCL_PAIR_NULL;
-    elsif (a = NCL_PAIR_NULL OR b = NCL_PAIR_NULL OR ci = NCL_PAIR_NULL) then
-      sum := prev(0);
-      carry := prev(1);
-    elsif (a = NCL_PAIR_DATA0 AND b = NCL_PAIR_DATA0 AND ci = NCL_PAIR_DATA0) then
-      sum := NCL_PAIR_DATA0;
-      carry := NCL_PAIR_DATA0;
-    elsif (a = NCL_PAIR_DATA1 AND b = NCL_PAIR_DATA1 AND ci = NCL_PAIR_DATA0) then
-      sum := NCL_PAIR_DATA0;
-      carry := NCL_PAIR_DATA1;
-    elsif (a /= b AND ci = NCL_PAIR_DATA0) then
-      sum := NCL_PAIR_DATA1;
-      carry := NCL_PAIR_DATA0;
-    elsif (a = NCL_PAIR_DATA0 AND b = NCL_PAIR_DATA0 AND ci = NCL_PAIR_DATA1) then
-      sum := NCL_PAIR_DATA1;
-      carry := NCL_PAIR_DATA0;
-    elsif (a = NCL_PAIR_DATA1 AND b = NCL_PAIR_DATA1 AND ci = NCL_PAIR_DATA1) then
-      sum := NCL_PAIR_DATA1;
-      carry := NCL_PAIR_DATA1;
-    elsif (a /= b AND ci = NCL_PAIR_DATA1) then
-      sum := NCL_PAIR_DATA0;
-      carry := NCL_PAIR_DATA1;
-    end if;
-	states(0) := sum;
-	states(1) := carry;
-    return states;
+    -- a1b1
+    state(2).DATA0 := TH34_f(prev(2).DATA0, a.DATA1, b.DATA1, c.DATA0, c.DATA1);
+    -- a1c1
+    state(2).DATA1 := TH34_f(prev(2).DATA1, a.DATA1, c.DATA1, b.DATA0, b.DATA1);
+    -- b1c1
+    state(3).DATA0 := TH34_f(prev(3).DATA0, b.DATA1, c.DATA1, a.DATA0, a.DATA1);
+    state(1).DATA1 := TH13_f(prev(1).DATA1, state(2).DATA0, state(2).DATA1, state(3).DATA0);
+    
+    -- all 0
+    state(3).DATA1 := TH33_f(prev(3).DATA1, a.DATA0, b.DATA0, c.DATA0);
+    -- 2 0's
+    state(4).DATA0 := TH23_f(prev(4).DATA0, a.DATA0, b.DATA0, c.DATA0);
+    -- 1 1
+     state(4).DATA1 := TH13_f(prev(4).DATA1, a.DATA1, b.DATA1, c.DATA1);
+    -- all 0, or 2 zeros and a 1
+    state(1).DATA0 := TH23w2_f(prev(1).DATA0, state(3).DATA1, state(4).DATA0, state(4).DATA1);
+    
+    -- all 1
+    state(5).DATA0 := TH33_f(prev(5).DATA0, a.DATA1, b.DATA1, c.DATA1);
+    -- all 1, or 2 zeros and a 1
+    state(0).DATA1 := TH23w2_f(prev(0).DATA1, state(5).DATA0, state(4).DATA0, state(4).DATA1);
+    
+    -- 2 1's
+    state(6).DATA0 := TH23_f(prev(6).DATA0, a.DATA1, b.DATA1, c.DATA1);
+    -- 1 0
+    state(6).DATA1 := TH13_f(prev(6).DATA1, a.DATA0, b.DATA0, c.DATA0);
+    -- all 0, or 2 ones and a 0
+    state(0).DATA0 := TH23w2_f(prev(0).DATA0, state(3).DATA1, state(6).DATA0, state(6).DATA1); 
+    
+    return state;
   end function;
   
   function add_extractsum(state : ncl_pair_vector) return ncl_pair_vector is
