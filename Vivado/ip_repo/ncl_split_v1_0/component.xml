@@ -1,0 +1,742 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spirit:component xmlns:xilinx="http://www.xilinx.com" xmlns:spirit="http://www.spiritconsortium.org/XMLSchema/SPIRIT/1685-2009" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <spirit:vendor>goingclockless.wordpress.com</spirit:vendor>
+  <spirit:library>ncl</spirit:library>
+  <spirit:name>ncl_split</spirit:name>
+  <spirit:version>1.0</spirit:version>
+  <spirit:busInterfaces>
+    <spirit:busInterface>
+      <spirit:name>iData</spirit:name>
+      <spirit:busType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail_rtl" spirit:version="1.0"/>
+      <spirit:slave/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>0</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>iData_0</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>1</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>iData_1</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>oData1</spirit:name>
+      <spirit:busType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>0</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData1_0</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>1</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData1_1</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:vendorExtensions>
+        <xilinx:busInterfaceInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.oData1" xilinx:dependency="$PORTS > 0">true</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:busInterfaceInfo>
+      </spirit:vendorExtensions>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>oData2</spirit:name>
+      <spirit:busType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>0</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData2_0</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>1</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData2_1</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:vendorExtensions>
+        <xilinx:busInterfaceInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.oData2" xilinx:dependency="$PORTS > 1">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:busInterfaceInfo>
+      </spirit:vendorExtensions>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>oData3</spirit:name>
+      <spirit:busType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>0</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData3_0</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>1</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData3_1</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:vendorExtensions>
+        <xilinx:busInterfaceInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.oData3" xilinx:dependency="$PORTS > 2">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:busInterfaceInfo>
+      </spirit:vendorExtensions>
+    </spirit:busInterface>
+    <spirit:busInterface>
+      <spirit:name>oData4</spirit:name>
+      <spirit:busType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail" spirit:version="1.0"/>
+      <spirit:abstractionType spirit:vendor="goingclockless.wordpress.com" spirit:library="ncl" spirit:name="ncl_2rail_rtl" spirit:version="1.0"/>
+      <spirit:master/>
+      <spirit:portMaps>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>0</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData4_0</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+        <spirit:portMap>
+          <spirit:logicalPort>
+            <spirit:name>1</spirit:name>
+          </spirit:logicalPort>
+          <spirit:physicalPort>
+            <spirit:name>oData4_1</spirit:name>
+          </spirit:physicalPort>
+        </spirit:portMap>
+      </spirit:portMaps>
+      <spirit:vendorExtensions>
+        <xilinx:busInterfaceInfo>
+          <xilinx:enablement>
+            <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="BUSIF_ENABLEMENT.oData4" xilinx:dependency="$PORTS > 3">false</xilinx:isEnabled>
+          </xilinx:enablement>
+        </xilinx:busInterfaceInfo>
+      </spirit:vendorExtensions>
+    </spirit:busInterface>
+  </spirit:busInterfaces>
+  <spirit:model>
+    <spirit:views>
+      <spirit:view>
+        <spirit:name>xilinx_anylanguagesynthesis</spirit:name>
+        <spirit:displayName>Synthesis</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:synthesis</spirit:envIdentifier>
+        <spirit:language>VHDL</spirit:language>
+        <spirit:modelName>ncl_splitter</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagesynthesis_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>e41f5fc1</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_anylanguagebehavioralsimulation</spirit:name>
+        <spirit:displayName>Simulation</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:simulation</spirit:envIdentifier>
+        <spirit:language>VHDL</spirit:language>
+        <spirit:modelName>ncl_splitter</spirit:modelName>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>e41f5fc1</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+      <spirit:view>
+        <spirit:name>xilinx_xpgui</spirit:name>
+        <spirit:displayName>UI Layout</spirit:displayName>
+        <spirit:envIdentifier>:vivado.xilinx.com:xgui.ui</spirit:envIdentifier>
+        <spirit:fileSetRef>
+          <spirit:localName>xilinx_xpgui_view_fileset</spirit:localName>
+        </spirit:fileSetRef>
+        <spirit:parameters>
+          <spirit:parameter>
+            <spirit:name>viewChecksum</spirit:name>
+            <spirit:value>d447bb31</spirit:value>
+          </spirit:parameter>
+        </spirit:parameters>
+      </spirit:view>
+    </spirit:views>
+    <spirit:ports>
+      <spirit:port>
+        <spirit:name>iData_0</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">0</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>iData_1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">0</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>from_next1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">0</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+        <spirit:vendorExtensions>
+          <xilinx:portInfo>
+            <xilinx:enablement>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.from_next1" xilinx:dependency="$PORTS > 0">true</xilinx:isEnabled>
+            </xilinx:enablement>
+          </xilinx:portInfo>
+        </spirit:vendorExtensions>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>from_next2</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">0</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+        <spirit:vendorExtensions>
+          <xilinx:portInfo>
+            <xilinx:enablement>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.from_next2" xilinx:dependency="$PORTS > 1">false</xilinx:isEnabled>
+            </xilinx:enablement>
+          </xilinx:portInfo>
+        </spirit:vendorExtensions>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>from_next3</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">0</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+        <spirit:vendorExtensions>
+          <xilinx:portInfo>
+            <xilinx:enablement>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.from_next3" xilinx:dependency="$PORTS > 2">false</xilinx:isEnabled>
+            </xilinx:enablement>
+          </xilinx:portInfo>
+        </spirit:vendorExtensions>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>from_next4</spirit:name>
+        <spirit:wire>
+          <spirit:direction>in</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+          <spirit:driver>
+            <spirit:defaultValue spirit:format="long">0</spirit:defaultValue>
+          </spirit:driver>
+        </spirit:wire>
+        <spirit:vendorExtensions>
+          <xilinx:portInfo>
+            <xilinx:enablement>
+              <xilinx:isEnabled xilinx:resolve="dependent" xilinx:id="PORT_ENABLEMENT.from_next4" xilinx:dependency="$PORTS > 3">false</xilinx:isEnabled>
+            </xilinx:enablement>
+          </xilinx:portInfo>
+        </spirit:vendorExtensions>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData1_0</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData1_1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData2_0</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData2_1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData3_0</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData3_1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData4_0</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>oData4_1</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:vector>
+            <spirit:left spirit:format="long" spirit:resolve="dependent" spirit:dependency="(spirit:decode(id(&apos;MODELPARAM_VALUE.NBITS&apos;)) - 1)">0</spirit:left>
+            <spirit:right spirit:format="long">0</spirit:right>
+          </spirit:vector>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic_vector</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+      <spirit:port>
+        <spirit:name>to_prev</spirit:name>
+        <spirit:wire>
+          <spirit:direction>out</spirit:direction>
+          <spirit:wireTypeDefs>
+            <spirit:wireTypeDef>
+              <spirit:typeName>std_logic</spirit:typeName>
+              <spirit:viewNameRef>xilinx_anylanguagesynthesis</spirit:viewNameRef>
+              <spirit:viewNameRef>xilinx_anylanguagebehavioralsimulation</spirit:viewNameRef>
+            </spirit:wireTypeDef>
+          </spirit:wireTypeDefs>
+        </spirit:wire>
+      </spirit:port>
+    </spirit:ports>
+    <spirit:modelParameters>
+      <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
+        <spirit:name>NBITS</spirit:name>
+        <spirit:displayName>Nbits</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.NBITS">1</spirit:value>
+      </spirit:modelParameter>
+      <spirit:modelParameter spirit:dataType="integer">
+        <spirit:name>PORTS</spirit:name>
+        <spirit:displayName>Ports</spirit:displayName>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.PORTS">1</spirit:value>
+      </spirit:modelParameter>
+    </spirit:modelParameters>
+  </spirit:model>
+  <spirit:fileSets>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagesynthesis_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>src/ncl.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/ncl_split.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/THnn.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_517c4689</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_anylanguagebehavioralsimulation_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>src/ncl.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/ncl_split.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+      <spirit:file>
+        <spirit:name>src/THnn.vhd</spirit:name>
+        <spirit:fileType>vhdlSource</spirit:fileType>
+      </spirit:file>
+    </spirit:fileSet>
+    <spirit:fileSet>
+      <spirit:name>xilinx_xpgui_view_fileset</spirit:name>
+      <spirit:file>
+        <spirit:name>xgui/ncl_split_v1_0.tcl</spirit:name>
+        <spirit:fileType>tclSource</spirit:fileType>
+        <spirit:userFileType>CHECKSUM_d447bb31</spirit:userFileType>
+        <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
+      </spirit:file>
+    </spirit:fileSet>
+  </spirit:fileSets>
+  <spirit:description>Null Convention Logic data duplication unit. Duplicates a single input to up to 4 outputs with merging of completion detection lines.</spirit:description>
+  <spirit:parameters>
+    <spirit:parameter>
+      <spirit:name>Component_Name</spirit:name>
+      <spirit:value spirit:resolve="user" spirit:id="PARAM_VALUE.Component_Name" spirit:order="1">TH12_v1_0</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>NBITS</spirit:name>
+      <spirit:displayName>Nbits</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.NBITS">1</spirit:value>
+    </spirit:parameter>
+    <spirit:parameter>
+      <spirit:name>PORTS</spirit:name>
+      <spirit:displayName>Ports</spirit:displayName>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.PORTS" spirit:minimum="0" spirit:maximum="4" spirit:rangeType="long">1</spirit:value>
+    </spirit:parameter>
+  </spirit:parameters>
+  <spirit:vendorExtensions>
+    <xilinx:coreExtensions>
+      <xilinx:supportedFamilies>
+        <xilinx:family xilinx:lifeCycle="Production">virtex7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">qvirtex7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">kintex7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">kintex7l</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">qkintex7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">qkintex7l</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">artix7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">artix7l</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">aartix7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">qartix7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">zynq</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">qzynq</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">azynq</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">spartan7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">aspartan7</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">virtexu</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">zynquplus</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">virtexuplus</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">virtexuplusHBM</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">kintexuplus</xilinx:family>
+        <xilinx:family xilinx:lifeCycle="Production">kintexu</xilinx:family>
+      </xilinx:supportedFamilies>
+      <xilinx:taxonomies>
+        <xilinx:taxonomy>/UserIP</xilinx:taxonomy>
+      </xilinx:taxonomies>
+      <xilinx:displayName>NCL Splitter</xilinx:displayName>
+      <xilinx:definitionSource>package_project</xilinx:definitionSource>
+      <xilinx:vendorDisplayName>James Talbert</xilinx:vendorDisplayName>
+      <xilinx:vendorURL>http://goingclockless.wordpress.com</xilinx:vendorURL>
+      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>iastate.edu:user:TH12:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2019-01-26T04:07:27Z</xilinx:coreCreationDateTime>
+      <xilinx:tags>
+        <xilinx:tag xilinx:name="nopcore"/>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@28eaf8cd_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@15e01c69_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7add3ab2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3832b1d3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4d4074cc_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7cc9cacb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@47f5afc1_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7b424a0c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@48ab91c5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@20d6a133_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6753c6b5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@799d6dcb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2fbb92e5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@798da051_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4dc859b7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b49f27f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@190a2c91_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b9b98f8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@23e1bc33_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@244f9817_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@341412a8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a3c90b1_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e42ffdf_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@f586b51_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@85cd377_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@51c9f254_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ef5d63e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@15244af2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46aa99d7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@50348cce_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2199ebb1_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6cd24604_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7897205_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2c0bd726_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4029dfbf_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@716c6e73_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@535664c2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@79a7eeb7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@70e7a4e6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61554564_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e5eba60_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e52f272_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4881cd4a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@835f297_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@65150083_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@d62d61b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d7377a5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4fa45930_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6a741177_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@640c9798_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5697a99f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@49c432f1_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34aa87ce_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@737e140a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@32e6c102_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2b233ba0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1ae6cf30_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@bf4a81_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@96e909_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5f9fbf7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b062457_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@21fa7284_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@12005eac_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2464d5a3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6650d99b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4be10a0d_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@371954e8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@22057ad9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@13c204d4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4ec0ed96_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@347fee96_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35ab840a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2750a3e6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e5357bf_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3f069a55_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1ff072bf_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e8e6cfd_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@24f04833_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@117ea817_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6d430cc8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@24e04e57_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@330c15a2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5ba8858_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@29dfe372_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7366f3fe_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@779a17eb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@79c6dd7c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78287226_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2eb09407_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3198f501_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5eff7777_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@221e6875_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@209c9d23_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@407d1e69_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@549e62e2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@382613ac_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16d1f6e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60f551a5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7171afd8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@435e257_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@53ac83bc_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@12d66548_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d766db4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@528dfdf9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5da6ef79_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e4d3754_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@729a94a9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38b490ad_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b6a2945_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@462465a0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6981e81e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a2f36b7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7f825db2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6814c7c4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61546c8f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4cd855d6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e3fa644_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c8673b0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3126f88e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1589f84c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@19f45111_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1ec44389_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@195eed8c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d0b529_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d5b7825_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@755d9b53_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a6eae48_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5bb50053_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@23d86da9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@eceacdb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@458cd30a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_split_v1_0</xilinx:tag>
+      </xilinx:tags>
+    </xilinx:coreExtensions>
+    <xilinx:packagingInfo>
+      <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
+      <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="f1b1e95e"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="92d65fd3"/>
+      <xilinx:checksum xilinx:scope="ports" xilinx:value="2ae54c48"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="a86eb727"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="ed9cbe8c"/>
+    </xilinx:packagingInfo>
+  </spirit:vendorExtensions>
+</spirit:component>

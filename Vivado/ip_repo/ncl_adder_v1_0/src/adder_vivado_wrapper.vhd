@@ -32,36 +32,36 @@ use work.ncl.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity ncl_fulladder_wrapper is
-    Port ( iA_0 : in STD_LOGIC;
-           iA_1 : in STD_LOGIC;
-           iB_0 : in STD_LOGIC;
-           iB_1 : in STD_LOGIC;
+entity ncl_adder_wrapper is
+    Generic ( N : integer := 1);
+    Port ( iA_0 : in STD_LOGIC_VECTOR(N-1 downto 0);
+           iA_1 : in STD_LOGIC_VECTOR(N-1 downto 0);
+           iB_0 : in STD_LOGIC_VECTOR(N-1 downto 0);
+           iB_1 : in STD_LOGIC_VECTOR(N-1 downto 0);
            iC_0 : in STD_LOGIC;
            iC_1 : in STD_LOGIC;
-           oS_0 : out STD_LOGIC;
-           oS_1 : out STD_LOGIC;
+           oS_0 : out STD_LOGIC_VECTOR(N-1 downto 0);
+           oS_1 : out STD_LOGIC_VECTOR(N-1 downto 0);
            oC_0 : out STD_LOGIC;
            oC_1 : out STD_LOGIC);
-end ncl_fulladder_wrapper;
+end ncl_adder_wrapper;
 
-architecture structural of ncl_fulladder_wrapper is
-  signal A, B, S: ncl_pair;
+architecture structural of ncl_adder_wrapper is
+  signal A, B, S: ncl_pair_vector(N-1 downto 0);
   signal Ci, Co: ncl_pair;
   signal adder_state : ncl_pair_vector(6 downto 0);
 begin
   
-  A <= (DATA0 => iA_0, DATA1 => iA_1);
-  B <= (DATA0 => iB_0, DATA1 => iB_1);
-  
+  A <= to_ncl_pair_vector(iA_0, iA_1);
+  B <= to_ncl_pair_vector(iB_0, iB_1);
   Ci <= (DATA0 => iC_0, DATA1 => iC_1);
   
   adder_state <= add(adder_state, A, B, Ci);
-  Co <= adder_state(1);
-  S <= adder_state(0);
+  Co <= add_extractsum(adder_state)(N);
+  S <= add_extractsum(adder_state)(N-1 downto 0);
 
-  oS_0 <= S.DATA0;
-  oS_1 <= S.DATA1;
+  oS_0 <= to_data0_vector(S);
+  oS_1 <= to_data1_vector(S);
 
   oC_0 <= Co.DATA0;
   oC_1 <= Co.DATA1;
