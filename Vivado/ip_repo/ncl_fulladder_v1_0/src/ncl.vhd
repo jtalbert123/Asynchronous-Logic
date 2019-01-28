@@ -293,13 +293,15 @@ package ncl is
     port(isig : in  std_logic_vector(N-1 downto 0);
          osig : out std_logic := '0');
   end component;
+  
+  function max(a : integer; b : integer) return integer;
 
 end ncl;
 
 package body ncl is
-  constant NCL_PAIR_NULL : ncl_pair := ('0', '0');
-  constant NCL_PAIR_DATA0 : ncl_pair := ('1', '0');
-  constant NCL_PAIR_DATA1 : ncl_pair := ('0', '1');
+  constant NCL_PAIR_NULL : ncl_pair := (DATA0 => '0', DATA1 => '0');
+  constant NCL_PAIR_DATA0 : ncl_pair := (DATA0 => '1', DATA1 => '0');
+  constant NCL_PAIR_DATA1 : ncl_pair := (DATA0 => '0', DATA1 => '1');
 
   function clog2(input : integer) return integer is
   begin
@@ -667,7 +669,7 @@ package body ncl is
     end loop;
     return toReturn;
   end function;
-  
+
   function ncl_pair_null_vector(N : integer) return ncl_pair_vector is
     variable toReturn : ncl_pair_vector(N - 1 downto 0);
   begin
@@ -719,6 +721,13 @@ package body ncl is
       end if;
     end loop;
     return toReturn;
+  end function;
+  
+  function max(a : integer; b : integer) return integer is
+  begin
+    if (a > b) then return a;
+    else return b;
+    end if;
   end function;
 
 end package body ncl;

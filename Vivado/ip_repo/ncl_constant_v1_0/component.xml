@@ -44,7 +44,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>af01fbbd</spirit:value>
+            <spirit:value>4ff3e927</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -60,7 +60,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>af01fbbd</spirit:value>
+            <spirit:value>4ff3e927</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -135,7 +135,7 @@
       <spirit:modelParameter xsi:type="spirit:nameValueTypeType" spirit:dataType="integer">
         <spirit:name>N</spirit:name>
         <spirit:displayName>N</spirit:displayName>
-        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.N">0</spirit:value>
+        <spirit:value spirit:format="long" spirit:resolve="generated" spirit:id="MODELPARAM_VALUE.N">1</spirit:value>
       </spirit:modelParameter>
       <spirit:modelParameter spirit:dataType="integer">
         <spirit:name>value</spirit:name>
@@ -154,7 +154,7 @@
       <spirit:file>
         <spirit:name>src/ncl_constant.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_e55eeaea</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_94f232ad</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -187,7 +187,7 @@
     <spirit:parameter>
       <spirit:name>N</spirit:name>
       <spirit:displayName>Data Width</spirit:displayName>
-      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.N">0</spirit:value>
+      <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.N">1</spirit:value>
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>value</spirit:name>
@@ -227,11 +227,11 @@
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>James Talbert</xilinx:vendorDisplayName>
       <xilinx:vendorURL>http://goingclockless.com</xilinx:vendorURL>
-      <xilinx:coreRevision>2</xilinx:coreRevision>
+      <xilinx:coreRevision>3</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>iastate.edu:user:TH12:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2019-01-26T04:50:36Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2019-01-28T00:19:04Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@c1b16f0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
@@ -351,15 +351,27 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@7f7dadd3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@61fd123a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@faa01c4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@41450112_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@706523f6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a54189a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2e263faa_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@667969b8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@704b8bb1_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d69ef7e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f98022d_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@39d75002_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@231d2a50_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@239fea19_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6739e745_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_constant_v1_0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="b28b23fd"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="7e9dc736"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="6fedd53b"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="92347774"/>
-      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="ce004872"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="69824188"/>
+      <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="95ec5d09"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="f76468c1"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

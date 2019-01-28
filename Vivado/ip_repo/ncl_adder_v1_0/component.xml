@@ -140,7 +140,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c2266759</spirit:value>
+            <spirit:value>d322b1f6</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -156,7 +156,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>c2266759</spirit:value>
+            <spirit:value>d322b1f6</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -170,7 +170,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>e01eaddf</spirit:value>
+            <spirit:value>47c13099</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -363,13 +363,11 @@
       <spirit:file>
         <spirit:name>src/ncl.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/adder_vivado_wrapper.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_eb0f3ebd</spirit:userFileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_b7acad5e</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -377,12 +375,10 @@
       <spirit:file>
         <spirit:name>src/ncl.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
       <spirit:file>
         <spirit:name>src/adder_vivado_wrapper.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
-        <spirit:userFileType>USED_IN_ipstatic</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
     <spirit:fileSet>
@@ -390,12 +386,12 @@
       <spirit:file>
         <spirit:name>xgui/ncl_adder_v1_0.tcl</spirit:name>
         <spirit:fileType>tclSource</spirit:fileType>
-        <spirit:userFileType>CHECKSUM_e01eaddf</spirit:userFileType>
+        <spirit:userFileType>CHECKSUM_47c13099</spirit:userFileType>
         <spirit:userFileType>XGUI_VERSION_2</spirit:userFileType>
       </spirit:file>
     </spirit:fileSet>
   </spirit:fileSets>
-  <spirit:description>Null Convention Logic adder using 2-rail I/O</spirit:description>
+  <spirit:description>Null Convention Logic adder module with dual-rail inputs</spirit:description>
   <spirit:parameters>
     <spirit:parameter>
       <spirit:name>Component_Name</spirit:name>
@@ -403,7 +399,7 @@
     </spirit:parameter>
     <spirit:parameter>
       <spirit:name>N</spirit:name>
-      <spirit:displayName>Data Width</spirit:displayName>
+      <spirit:displayName>N</spirit:displayName>
       <spirit:value spirit:format="long" spirit:resolve="user" spirit:id="PARAM_VALUE.N">1</spirit:value>
     </spirit:parameter>
   </spirit:parameters>
@@ -439,96 +435,111 @@
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>James Talbert</xilinx:vendorDisplayName>
       <xilinx:vendorURL>http://goingclockless.wordpress.com</xilinx:vendorURL>
-      <xilinx:coreRevision>9</xilinx:coreRevision>
-      <xilinx:coreCreationDateTime>2019-01-26T04:47:45Z</xilinx:coreCreationDateTime>
+      <xilinx:coreRevision>5</xilinx:coreRevision>
+      <xilinx:upgrades>
+        <xilinx:canUpgradeFrom>iastate.edu:user:TH12:1.0</xilinx:canUpgradeFrom>
+      </xilinx:upgrades>
+      <xilinx:coreCreationDateTime>2019-01-28T16:23:48Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a6d00e8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@20ad2c91_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@1cb1c979_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@6adcc4d4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@65efc155_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d849ce2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@5efb5f7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@1c1f96ab_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b1b28cf_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@2eb45eb7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@59fd95fa_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@58951de0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@5b902ddd_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@60314ef9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@212477d3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@126f30d0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@22dfea45_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@66dda369_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@7923bfbc_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@45e67b61_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3e0cfd8e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@36fbcd6a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@8d4bd29_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@36b7e2c9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@27980da5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@7283e4f4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@73155925_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@682f5ea9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@39923fed_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@5870be1a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@36092e5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c2d2b72_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ccc5185_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@6797300f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@18174dd2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@523b348e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ac5419d_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@57715c2e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@36fa6fb8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@59fb2ca6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@2da77a34_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a598218_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@35fc9f18_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@39fc4577_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@15f8397e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@43adae7b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@d144232_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@19c77e61_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@1ff1b656_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@60704512_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@581a44d7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@7cf531eb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@6dab3474_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e573c5e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a8fc410_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@4198740b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b38a1c9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3f2dc5ed_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@146c8e8a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a9877a8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@7e3138da_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@44d94906_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@54a120a2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@22feb2a0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@22511e12_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@360d1379_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@242753f4_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ff8f501_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3ea94136_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@3154cbf5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@67f5da24_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@156c5fbd_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@431302a6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@47a88e09_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@1743215_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@27cf9c3e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
-        <xilinx:tag xilinx:name="ui.data.coregen.dd@6eb665ba_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@193d9070_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@488d5914_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@347509a2_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a4b24b6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@56ed1a0e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@e8b7285_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e220d16_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@37420449_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@39209b37_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ae1cb58_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7c9f9731_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4e22ea48_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3a8a39e5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a76616e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a468d05_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f51b280_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4f61449b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@30127204_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7cb433b6_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@38056be3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@66769458_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@479b10d8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1853875_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@c23a877_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7f532207_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@77916845_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@32e1476e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6f6d1721_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a0dee10_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a991d4a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3eed9e0f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5d9bec66_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2f84f643_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@745a1354_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5e469482_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2cfd8625_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16c90eeb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76db59ad_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@78a2ce45_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a3752af_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@46dffe0d_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@34d2bdb3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@634aeca8_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7bc75b46_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4b03b601_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6397375c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6b3ac200_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1fe1fc3a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7529b47d_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e0f8a9f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5a6d6908_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6238212e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6758f687_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@61451ff3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6c25642_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5616340_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@a4e217a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@16fc1b84_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3013b54_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a6c1241_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2a7958af_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@625ae3a7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6656bb97_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@6e5ebf04_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@330da562_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@43615366_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@73256034_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@14ef1fb9_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7a066075_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3de17e0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@74fadc86_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5f1a8e43_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@63b6068_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@59390723_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@40ea49d0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3f91d23_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@67daa0cd_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@58b97e5f_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@bfc9481_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2bd249bf_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e762d15_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35afdbbc_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7619b108_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@5fb7c62e_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2d1e8c3c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@456dc0a5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76fa111b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@2bef2f5c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@60012a1b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="1201507f"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="9a3ca272"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b79ee19c"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="28d238f9"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="0c6db3ca"/>
-      <xilinx:checksum xilinx:scope="parameters" xilinx:value="22ff044a"/>
+      <xilinx:checksum xilinx:scope="parameters" xilinx:value="482a70cb"/>
     </xilinx:packagingInfo>
   </spirit:vendorExtensions>
 </spirit:component>

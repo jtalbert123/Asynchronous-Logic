@@ -49,7 +49,7 @@ end ncl_adder_wrapper;
 architecture structural of ncl_adder_wrapper is
   signal A, B, S: ncl_pair_vector(N-1 downto 0);
   signal Ci, Co: ncl_pair;
-  signal adder_state : ncl_pair_vector(6 downto 0);
+  signal adder_state : ncl_pair_vector(7*N-1 downto 0);
 begin
   
   A <= to_ncl_pair_vector(iA_0, iA_1);

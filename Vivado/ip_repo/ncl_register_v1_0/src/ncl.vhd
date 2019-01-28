@@ -293,13 +293,15 @@ package ncl is
     port(isig : in  std_logic_vector(N-1 downto 0);
          osig : out std_logic := '0');
   end component;
+  
+  function max(a : integer; b : integer) return integer;
 
 end ncl;
 
 package body ncl is
-  constant NCL_PAIR_NULL : ncl_pair := ('0', '0');
-  constant NCL_PAIR_DATA0 : ncl_pair := ('1', '0');
-  constant NCL_PAIR_DATA1 : ncl_pair := ('0', '1');
+  constant NCL_PAIR_NULL : ncl_pair := (DATA0 => '0', DATA1 => '0');
+  constant NCL_PAIR_DATA0 : ncl_pair := (DATA0 => '1', DATA1 => '0');
+  constant NCL_PAIR_DATA1 : ncl_pair := (DATA0 => '0', DATA1 => '1');
 
   function clog2(input : integer) return integer is
   begin
@@ -622,11 +624,11 @@ package body ncl is
   end function;
   
   function add_extractsum(state : ncl_pair_vector) return ncl_pair_vector is
-    variable toReturn : ncl_pair_vector(state'length/2 downto 0);
+    variable toReturn : ncl_pair_vector(state'length/7 downto 0);
   begin
-    toReturn(state'length/2) := state(state'length-1);
-    for i in state'length/2-1 downto 0 loop
-      toReturn(i) := state(2*i);
+    toReturn(state'length/7) := state(state'length-6);
+    for i in state'length/7-1 downto 0 loop
+      toReturn(i) := state(7*i);
     end loop;
 	return toReturn;
   end function;
@@ -634,12 +636,12 @@ package body ncl is
   -- sum is the first N entries of the return.
   function add(prev : ncl_pair_vector; left : ncl_pair_vector; right : ncl_pair_vector; ci : ncl_pair) return ncl_pair_vector is
     -- Even indexes are the sums, odd are the carries.
-    variable states : ncl_pair_vector(2*left'length - 1 downto 0);
+    variable states : ncl_pair_vector(7*left'length - 1 downto 0);
   begin
     -- Do the addition
-    states(1 downto 0) := add(prev(1 downto 0), left(0), right(0), ci);
+    states(6 downto 0) := add(prev(6 downto 0), left(0), right(0), ci);
     for i in 1 to left'length - 1 loop
-      states(2*i+1 downto 2*i) := add(prev(2*i+1 downto 2*i), left(i), right(i), states(2*i-1));
+      states(7*i+6 downto 7*i) := add(prev(7*i+6 downto 7*i), left(i), right(i), states(7*(i-1)+1));
     end loop;
     return states;
   end function;
@@ -719,6 +721,13 @@ package body ncl is
       end if;
     end loop;
     return toReturn;
+  end function;
+  
+  function max(a : integer; b : integer) return integer is
+  begin
+    if (a > b) then return a;
+    else return b;
+    end if;
   end function;
 
 end package body ncl;

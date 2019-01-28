@@ -21,7 +21,7 @@ begin
     if (from_next = '0') then -- send null
       value_0 <= to_data0_vector(nullwave);
       value_1 <= to_data1_vector(nullwave);
-    elsif (from_next = '0') then -- send data
+    elsif (from_next = '1') then -- send data
       value_0 <= to_data0_vector(datawave);
       value_1 <= to_data1_vector(datawave);
     end if;
