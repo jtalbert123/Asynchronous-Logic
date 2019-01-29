@@ -140,7 +140,7 @@
         <spirit:parameters>
           <spirit:parameter>
             <spirit:name>viewChecksum</spirit:name>
-            <spirit:value>d322b1f6</spirit:value>
+            <spirit:value>f67966c2</spirit:value>
           </spirit:parameter>
         </spirit:parameters>
       </spirit:view>
@@ -361,6 +361,10 @@
     <spirit:fileSet>
       <spirit:name>xilinx_anylanguagesynthesis_view_fileset</spirit:name>
       <spirit:file>
+        <spirit:name>src/local.xdc</spirit:name>
+        <spirit:userFileType>xdc</spirit:userFileType>
+      </spirit:file>
+      <spirit:file>
         <spirit:name>src/ncl.vhd</spirit:name>
         <spirit:fileType>vhdlSource</spirit:fileType>
       </spirit:file>
@@ -435,11 +439,11 @@
       <xilinx:definitionSource>package_project</xilinx:definitionSource>
       <xilinx:vendorDisplayName>James Talbert</xilinx:vendorDisplayName>
       <xilinx:vendorURL>http://goingclockless.wordpress.com</xilinx:vendorURL>
-      <xilinx:coreRevision>5</xilinx:coreRevision>
+      <xilinx:coreRevision>6</xilinx:coreRevision>
       <xilinx:upgrades>
         <xilinx:canUpgradeFrom>iastate.edu:user:TH12:1.0</xilinx:canUpgradeFrom>
       </xilinx:upgrades>
-      <xilinx:coreCreationDateTime>2019-01-28T16:23:48Z</xilinx:coreCreationDateTime>
+      <xilinx:coreCreationDateTime>2019-01-28T18:14:02Z</xilinx:coreCreationDateTime>
       <xilinx:tags>
         <xilinx:tag xilinx:name="nopcore"/>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@193d9070_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
@@ -531,12 +535,26 @@
         <xilinx:tag xilinx:name="ui.data.coregen.dd@76fa111b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@2bef2f5c_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
         <xilinx:tag xilinx:name="ui.data.coregen.dd@60012a1b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@124a304b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@41bd621a_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@35f500f5_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@be9bccb_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@1e154a5b_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@76393b94_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3d7a6bfd_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@644670d0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@4a1ccf1_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@7ece5f3_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@369141a7_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@243ac3f0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@29015995_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
+        <xilinx:tag xilinx:name="ui.data.coregen.dd@3b13b4a0_ARCHIVE_LOCATION">u:/Asynchronous-Logic/Vivado/ip_repo/ncl_adder_v1_0</xilinx:tag>
       </xilinx:tags>
     </xilinx:coreExtensions>
     <xilinx:packagingInfo>
       <xilinx:xilinxVersion>2018.3</xilinx:xilinxVersion>
       <xilinx:checksum xilinx:scope="busInterfaces" xilinx:value="1201507f"/>
-      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="b79ee19c"/>
+      <xilinx:checksum xilinx:scope="fileGroups" xilinx:value="751c3db8"/>
       <xilinx:checksum xilinx:scope="ports" xilinx:value="28d238f9"/>
       <xilinx:checksum xilinx:scope="hdlParameters" xilinx:value="0c6db3ca"/>
       <xilinx:checksum xilinx:scope="parameters" xilinx:value="482a70cb"/>
