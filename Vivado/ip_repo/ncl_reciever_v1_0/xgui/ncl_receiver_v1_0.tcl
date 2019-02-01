@@ -13,6 +13,7 @@ proc init_gui { IPINST } {
   ipgui::add_param $IPINST -name "N8" -parent ${Page_0}
   ipgui::add_param $IPINST -name "N9" -parent ${Page_0}
   ipgui::add_param $IPINST -name "N10" -parent ${Page_0}
+  ipgui::add_static_text $IPINST -name "Outputs" -parent ${Page_0} -text {The data outputs are connected directly to the inputs (when enabled). The status output is asserted when complete DATA is recieved, and cleared when complete NULL is recieved. The to_prev output is the inverse of the status output.}
 
 
 }

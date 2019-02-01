@@ -84,14 +84,17 @@ entity ncl_reciever is
         oData10_0 : out std_logic_vector(max(1, N10)-1 downto 0);
         oData10_1 : out std_logic_vector(max(1, N10)-1 downto 0);
         -- What this block wants to recieve (data or null)
-        to_prev   : out std_logic);
+        to_prev   : out std_logic;
+        completion: out std_logic;
+        any_active: out std_logic);
 end ncl_reciever;
 
 architecture Behavioral of ncl_reciever is
   constant total : integer := N1+N2+N3+N4+N5+N6+N7+N8+N9+N10;
   signal iData : ncl_pair_vector(total-1 downto 0);
   signal per_signal_completion : std_logic_vector(total-1 downto 0);
-  signal completion : std_logic;
+  signal completion_sig : std_logic;
+  signal any_zeros, any_ones : std_logic;
 begin
 
   data1: if (N1 > 0) generate
@@ -164,8 +167,20 @@ begin
   all_completion: THnn
                     generic map(N => total)
                     port map(isig => per_signal_completion,
-                             osig => completion);
+                             osig => completion_sig);
+                             
+  any_completion_0: TH1n
+                    generic map(N => total)
+                    port map(isig => to_data0_vector(iData),
+                             osig => any_zeros);
+                             
+  any_completion_1: TH1n
+                    generic map(N => total)
+                    port map(isig => to_data0_vector(iData),
+                             osig => any_ones);
   
-  to_prev <= NOT(completion);
+  to_prev <= NOT(completion_sig);
+  completion <= completion_sig;
+  any_active <= any_zeros OR any_ones;
   
 end Behavioral;
