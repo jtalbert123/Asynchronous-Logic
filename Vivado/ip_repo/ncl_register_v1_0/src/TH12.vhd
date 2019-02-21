@@ -9,15 +9,15 @@ end TH12;
 
 architecture simple of TH12 is
   signal fb : std_logic;
+  signal LUT3_inputs : std_logic_vector(1 downto 0);
 begin
+  LUT3_inputs <= iA & iB;
 
-  osig <= fb;
-
-  process(iA, iB, fb) begin
-    if (iA OR iB) = '1' then fb <= '1';
-    elsif (iA OR iB) = '0' then fb <= '0';
-    else fb <= fb;
-    end if;
-  end process;
-  
+  with LUT3_inputs select osig <= 
+    '0' when "00",
+    '1' when "01",
+    '1' when "10",
+    '1' when "11",
+	'0' when others;
+    
 end simple;

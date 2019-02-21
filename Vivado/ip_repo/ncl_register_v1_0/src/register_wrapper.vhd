@@ -41,7 +41,7 @@ entity register_wrapper is
           N7 : integer := 0;
           N8 : integer := 0;
           N9 : integer := 0;
-          N10 : integer := 1);
+          N10 : integer := 0);
   Port (iData1_0  : in std_logic_vector(max(1, N1)-1 downto 0);
         iData1_1  : in std_logic_vector(max(1, N1)-1 downto 0);
         iData2_0  : in std_logic_vector(max(1, N2)-1 downto 0);
@@ -84,6 +84,7 @@ entity register_wrapper is
         oData9_1  : out std_logic_vector(max(1, N9)-1 downto 0);
         oData10_0 : out std_logic_vector(max(1, N10)-1 downto 0);
         oData10_1 : out std_logic_vector(max(1, N10)-1 downto 0);
+        reset : in  std_logic;
        -- What this block wants to recieve (data or null)
        to_prev   : out std_logic);
 end register_wrapper;
@@ -96,6 +97,7 @@ architecture Behavioral of register_wrapper is
          -- Indicates what the next block wants to receive (data or null)
          from_next : in std_logic;
          oData    : out ncl_pair_vector(N-1 downto 0);
+         reset : in  std_logic;
          -- What this block wants to recieve (data or null)
          to_prev   : out std_logic);
   end component;
@@ -166,6 +168,7 @@ begin
         generic map(N => N1+N2+N3+N4+N5+N6+N7+N8+N9+N10)
         port map(iData => iData,
                  oData => oData,
+                 reset => reset,
                  from_next => from_next,
                  to_prev => to_prev);
 

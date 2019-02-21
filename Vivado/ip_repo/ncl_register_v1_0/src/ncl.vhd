@@ -79,12 +79,6 @@ package ncl is
        osig : out std_logic := '0');
   end component;
 
-  component TH22 is
-  port(iA : in  std_logic;
-       iB : in  std_logic;
-       osig : out std_logic := '0');
-  end component;
-
   component TH13 is
   port(iA : in  std_logic;
        iB : in  std_logic;
@@ -93,13 +87,6 @@ package ncl is
   end component;
 
   component TH23 is
-  port(iA : in  std_logic;
-       iB : in  std_logic;
-       iC : in  std_logic;
-       osig : out std_logic := '0');
-  end component;
-
-  component TH33 is
   port(iA : in  std_logic;
        iB : in  std_logic;
        iC : in  std_logic;
@@ -123,14 +110,6 @@ package ncl is
   end component;
 
   component TH34 is
-  port(iA : in  std_logic;
-       iB : in  std_logic;
-       iC : in  std_logic;
-       iD : in  std_logic;
-       osig : out std_logic := '0');
-  end component;
-
-  component TH44 is
   port(iA : in  std_logic;
        iB : in  std_logic;
        iC : in  std_logic;
@@ -282,13 +261,6 @@ package ncl is
 
   -- an OR gate
   component TH1n is
-    generic(N : integer := 2);
-    port(isig : in  std_logic_vector(N-1 downto 0);
-         osig : out std_logic := '0');
-  end component;
-
-  -- a NCL AND gate
-  component THnn is
     generic(N : integer := 2);
     port(isig : in  std_logic_vector(N-1 downto 0);
          osig : out std_logic := '0');

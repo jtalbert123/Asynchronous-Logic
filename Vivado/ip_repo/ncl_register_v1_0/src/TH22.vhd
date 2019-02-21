@@ -9,15 +9,20 @@ end TH22;
 
 architecture simple of TH22 is
   signal fb : std_logic;
+  signal LUT3_inputs : std_logic_vector(2 downto 0);
 begin
-
+  LUT3_inputs <= iA & iB & fb; 
   osig <= fb;
-
-  process(iA, iB, fb) begin
-    if (iA AND iB) = '1' then fb <= '1';
-    elsif (iA OR iB) = '0' then fb <= '0';
-    else fb <= fb;
-    end if;
-  end process;
   
+  with LUT3_inputs select fb <= 
+    '0' when "000",
+    '0' when "001",
+    '0' when "010",
+    '1' when "011",
+    '0' when "100",
+    '1' when "101",
+    '1' when "110",
+    '1' when "111",
+	'0' when others;
+     
 end simple;
