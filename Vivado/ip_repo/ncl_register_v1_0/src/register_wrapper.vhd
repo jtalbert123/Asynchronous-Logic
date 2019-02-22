@@ -41,7 +41,18 @@ entity register_wrapper is
           N7 : integer := 0;
           N8 : integer := 0;
           N9 : integer := 0;
-          N10 : integer := 0);
+          N10 : integer := 0;
+          reset_to_data : boolean := FALSE;
+          PORT1_RESET_VAL : integer := 0;
+          PORT2_RESET_VAL : integer := 0;
+          PORT3_RESET_VAL : integer := 0;
+          PORT4_RESET_VAL : integer := 0;
+          PORT5_RESET_VAL : integer := 0;
+          PORT6_RESET_VAL : integer := 0;
+          PORT7_RESET_VAL : integer := 0;
+          PORT8_RESET_VAL : integer := 0;
+          PORT9_RESET_VAL : integer := 0;
+          PORT10_RESET_VAL : integer := 0);
   Port (iData1_0  : in std_logic_vector(max(1, N1)-1 downto 0);
         iData1_1  : in std_logic_vector(max(1, N1)-1 downto 0);
         iData2_0  : in std_logic_vector(max(1, N2)-1 downto 0);
@@ -92,7 +103,9 @@ end register_wrapper;
 architecture Behavioral of register_wrapper is
 
   component DualRailRegister is
-    generic(N : integer := 1);
+    generic(N : integer := 1;
+            reset_to_data : boolean := FALSE;
+            reset_val : integer := 0);
     port(iData    : in ncl_pair_vector(N-1 downto 0);
          -- Indicates what the next block wants to receive (data or null)
          from_next : in std_logic;
@@ -103,6 +116,43 @@ architecture Behavioral of register_wrapper is
   end component;
   
   signal iData, oData : ncl_pair_vector(N1+N2+N3+N4+N5+N6+N7+N8+N9+N10-1 downto 0);
+  
+  function get_reset_val(a : integer) return integer is
+      variable val : integer := 0;
+  begin
+      if (N1 > 0) then
+          val := val + PORT1_RESET_VAL;
+      end if;
+      if (N2 > 0) then
+          val := val + PORT2_RESET_VAL * (2**(N1));
+      end if;
+      if (N3 > 0) then
+          val := val + PORT3_RESET_VAL * (2**(N1+N2));
+      end if;
+      if (N4 > 0) then
+          val := val + PORT4_RESET_VAL * (2**(N1+N2+N3));
+      end if;
+      if (N5 > 0) then
+          val := val + PORT5_RESET_VAL * (2**(N1+N2+N3+N4));
+      end if;
+      if (N6 > 0) then
+          val := val + PORT6_RESET_VAL * (2**(N1+N2+N3+N4+N5));
+      end if;
+      if (N7 > 0) then
+          val := val + PORT7_RESET_VAL * (2**(N1+N2+N3+N4+N5+N6));
+      end if;
+      if (N8 > 0) then
+          val := val + PORT8_RESET_VAL * (2**(N1+N2+N3+N4+N5+N6+N7));
+      end if;
+      if (N9 > 0) then
+          val := val + PORT9_RESET_VAL * (2**(N1+N2+N3+N4+N5+N6+N7+N8));
+      end if;
+      if (N10 > 0) then
+          val := val + PORT10_RESET_VAL * (2**(N1+N2+N3+N4+N5+N6+N7+N8+N9));
+      end if;
+      return val;
+  end function;
+  constant reset_val : integer := get_reset_val(0);
 begin
   data1: if (N1 > 0) generate
       iData(N1-1 downto 0) <= to_ncl_pair_vector(iData1_0, iData1_1);
@@ -165,7 +215,9 @@ begin
   end generate;
   
  U0 : DualRailRegister
-        generic map(N => N1+N2+N3+N4+N5+N6+N7+N8+N9+N10)
+        generic map(N => N1+N2+N3+N4+N5+N6+N7+N8+N9+N10,
+                    reset_to_data => reset_to_data,
+                    reset_val => reset_val)
         port map(iData => iData,
                  oData => oData,
                  reset => reset,

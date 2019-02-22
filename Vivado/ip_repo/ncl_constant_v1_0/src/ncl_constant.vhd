@@ -8,7 +8,8 @@ entity ncl_constant is
           value : integer);
   port(value_0 : out  std_logic_vector(N-1 downto 0);
        value_1 : out  std_logic_vector(N-1 downto 0);
-       from_next : in std_logic);
+       from_next : in std_logic;
+       reset     : in std_logic);
 end ncl_constant;
 
 architecture simple of ncl_constant is
@@ -18,7 +19,10 @@ begin
 
   process(from_next)
   begin
-    if (from_next = '0') then -- send null
+    if (reset = '1') then
+      value_0 <= to_data0_vector(nullwave);
+      value_1 <= to_data1_vector(nullwave);
+    elsif (from_next = '0') then -- send null
       value_0 <= to_data0_vector(nullwave);
       value_1 <= to_data1_vector(nullwave);
     elsif (from_next = '1') then -- send data
